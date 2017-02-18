@@ -31,10 +31,7 @@ public class AccountService implements UserDetailsService {
 	private PasswordEncoder passwordEncoder;
 
 	@PostConstruct	
-	protected void initialize() {
-		save(new Account("user", "demo", "ROLE_USER"));
-		save(new Account("admin", "admin", "ROLE_ADMIN"));
-	}
+	protected void initialize() {}
 
 	@Transactional
 	public Account save(Account account) {
