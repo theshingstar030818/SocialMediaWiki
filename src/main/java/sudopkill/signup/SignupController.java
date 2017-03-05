@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import sudopkill.account.Account;
 import sudopkill.account.AccountService;
+import sudopkill.support.web.Ajax;
 import sudopkill.support.web.MessageHelper;
 
 import javax.validation.Valid;
@@ -29,20 +30,17 @@ class SignupController {
     @GetMapping("signup")
     String signup(Model model, @RequestHeader(value = "X-Requested-With", required = false) String requestedWith) {
         model.addAttribute(new SignupForm());
-        if(requestedWith != null) {
+        if (Ajax.isAjaxRequest(requestedWith)) {
             return SIGNUP_VIEW_NAME.concat(" :: signupForm");
-        }else{
-            return SIGNUP_VIEW_NAME;
         }
+        return SIGNUP_VIEW_NAME;
     }
 
     @PostMapping("signup")
     String signup(@Valid @ModelAttribute SignupForm signupForm, Errors errors, RedirectAttributes ra) {
-
         if (errors.hasErrors()) {
             return SIGNUP_VIEW_NAME;
         }
-
         Account account = accountService.save(signupForm.createAccount());
         accountService.signin(account);
         MessageHelper.addSuccessAttribute(ra, "signup.success");

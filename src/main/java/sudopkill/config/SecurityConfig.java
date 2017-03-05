@@ -60,26 +60,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
-        http.antMatcher("/**").authorizeRequests().antMatchers("/", "/signin**", "/signup**", "/home/**", "/fonts/**", "/js/**", "/css/**", "/images/**", "/about/**", "/favicon.ico", "/resources/**").permitAll().anyRequest()
-                .authenticated().and().exceptionHandling()
-                .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/")).and().logout()
-                .logoutSuccessUrl("/").permitAll().and().csrf()
-                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
-                .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class)
+        http.antMatcher("/**").authorizeRequests()
+                .antMatchers("/", "/signin**", "/signup**", "/home/**", "/fonts/**", "/js/**", "/css/**", "/images/**", "/about/**", "/favicon.ico", "/resources/**", "/messages/**", "messages.properties**").permitAll()
+                .anyRequest().authenticated()
+                .and()
                 .formLogin()
                 .loginPage("/signin")
                 .permitAll()
                 .failureUrl("/signin?error=1")
                 .loginProcessingUrl("/authenticate")
                 .and()
-                .logout()
-                .logoutUrl("/logout")
-                .permitAll()
-                .logoutSuccessUrl("/signin?logout")
-                .and()
                 .rememberMe()
                 .rememberMeServices(rememberMeServices())
-                .key("remember-me-key");
+                .key("remember-me-key").and()
+                .exceptionHandling()
+                .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/")).and().logout()
+                .logoutSuccessUrl("/signin?logout").permitAll().and().csrf()
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
+                .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
         // @formatter:on
     }
 

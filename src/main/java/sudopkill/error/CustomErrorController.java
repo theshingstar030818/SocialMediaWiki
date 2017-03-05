@@ -3,6 +3,7 @@ package sudopkill.error;
 /**
  * Created by tanzeelrana on 3/5/2017.
  */
+
 import com.google.common.base.Throwables;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,7 @@ class CustomErrorController {
     /**
      * Display an error page, as defined in web.xml <code>custom-error</code> element.
      */
-    @GetMapping("generalError")
+    @GetMapping(value = "errors")
     public String generalError(HttpServletRequest request, HttpServletResponse response, Model model) {
         // retrieve some useful information from the request
         Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
