@@ -1,3 +1,5 @@
+
+
 facebook:
   client:
     clientId: 414665505536880
@@ -9,3 +11,13 @@ facebook:
     clientAuthenticationScheme: form
   resource:
     userInfoUri: https://graph.facebook.com/me
+
+github:
+  client:
+    clientId: 1ed84cede28feb9d8d2b
+    clientSecret: 29a21404982ced497433c2eed92f9d3d249b356a
+    accessTokenUri: https://github.com/login/oauth/access_token
+    userAuthorizationUri: https://github.com/login/oauth/authorize
+    clientAuthenticationScheme: form
+  resource:
+    userInfoUri: https://api.github.com/user

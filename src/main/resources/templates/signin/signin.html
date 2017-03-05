@@ -7,17 +7,33 @@
     <link href="../../static/css/core.css" rel="stylesheet" media="screen" th:href="@{/css/core.css}" />
     <link href="../../static/css/bootstrap-social.css" rel="stylesheet" media="screen" th:href="@{/css/bootstrap-social.css}" />
     <link href="../../static/css/bootstrap-social.less" rel="stylesheet" media="screen" th:href="@{/css/bootstrap-social.less}" />
+    <link href="../../static/css/docs.css" rel="stylesheet" media="screen" th:href="@{/css/docs.css}" />
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"  type='text/css'>
     <script src="../../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
     <script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+    <script src="../../static/js/docs.js" th:src="@{/js/docs.js}"></script>
 </head>
 <body>
 <div th:replace="fragments/layout :: header"></div>
+
+
 <form class="form-narrow form-horizontal" action="#" method="post" th:action="@{/signin}">
     <th:block th:if="${param.error != null}">
         <div th:replace="fragments/components :: alert (type='danger', message='Sign in error. Please try again.')">Alert</div>
     </th:block>
     <fieldset>
         <legend>Please Sign In</legend>
+
+        <a class="btn btn-block btn-social btn-facebook" href="/signin/facebook">
+            <span class="fa fa-facebook"></span>
+            Sign in with Facebook
+        </a>
+
+        <a class="btn btn-block btn-social btn-github" href="/signin/github">
+            <span class="fa fa-github"></span>
+            Sign in with Github
+        </a>
+
         <div class="form-group">
             <label for="inputEmail" class="col-lg-2 control-label">Email</label>
             <div class="col-lg-10">
@@ -47,14 +63,6 @@
                 <p>New here? <a href="signup" th:href="@{/signup}">Sign Up</a></p>
             </div>
         </div>
-
-        <div class="form-group">
-            <div class="col-lg-offset-2 col-lg-10">
-                <a class="btn btn-block btn-social btn-facebook" href="/signin/facebook"><i class="fa fa-facebook"></i>Sign in with Facebook</a>
-            </div>
-        </div>
-
-
 
     </fieldset>
 </form>
