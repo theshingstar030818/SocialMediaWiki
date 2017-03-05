@@ -14,7 +14,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#" th:text="${@environment.getProperty('app.name')}"></a>
+            <a class="navbar-brand" href="#" th:text="#{app.name}"></a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -25,19 +25,19 @@
                     <a href="#about" th:href="@{/about}">About</a>
                 </li>
             </ul>
-            <!--<ul class="nav navbar-nav navbar-right">-->
-                <!--<li th:if="${#authorization.expression('!isAuthenticated()')}">-->
-                    <!--<a href="/signin" th:href="@{/signin}">-->
-                        <!--<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Sign in-->
-                    <!--</a>-->
-                <!--</li>-->
-                <!--<li th:if="${#authorization.expression('isAuthenticated()')}">-->
-                    <!--<a href="/logout" th:href="@{#}" onclick="$('#form').submit();">-->
-                        <!--<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout-->
-                    <!--</a>-->
-                    <!--<form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>-->
-                <!--</li>-->
-            <!--</ul>-->
+            <ul class="nav navbar-nav navbar-right">
+                <li th:if="${#authorization.expression('!isAuthenticated()')}">
+                    <a href="/signin" th:href="@{/signin}">
+                        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Sign in
+                    </a>
+                </li>
+                <li th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a href="/logout" th:href="@{#}" onclick="$('#form').submit();">
+                        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout
+                    </a>
+                    <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>
+                </li>
+            </ul>
         </div>
         <!--/.nav-collapse -->
     </div>
@@ -46,7 +46,7 @@
 <!-- Footer -->
 <div th:fragment="footer" th:align="center">
     &copy;&nbsp;<span th:text="${#temporals.format(#temporals.createNow(), 'yyyy')}"></span>
-    Social Media Wiki <span th:text="${@environment.getProperty('app.version')}"></span>
+    Social Media Wiki <span th:text="#{app.version}"></span>
 </div>
 
 </body>

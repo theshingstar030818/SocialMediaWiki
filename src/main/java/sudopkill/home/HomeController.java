@@ -8,12 +8,14 @@ import java.security.Principal;
 /**
  * Created by tanzeelrana on 3/4/2017.
  */
+
 @Controller
 public class HomeController {
 
-    @GetMapping("/")
+    @GetMapping(value = {"/","/home"})
     String index(Principal principal) {
         System.out.println("principal : " + principal);
         return principal != null ? "home/homeSignedIn" : "home/homeNotSignedIn";
     }
+
 }
