@@ -1,8 +1,8 @@
-### SocialMediaWiki
+# SocialMediaWiki
 
 ## Sprint 1
 
-# Setting up environment
+### Setting up environment
 
 1. **Clone repo**  
 2. **Enable auto-import for intelliJ**
