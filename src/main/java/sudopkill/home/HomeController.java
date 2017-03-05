@@ -14,7 +14,6 @@ public class HomeController {
 
     @GetMapping(value = {"/","/home"})
     String index(Principal principal) {
-        System.out.println("principal : " + principal);
         return principal != null ? "home/homeSignedIn" : "home/homeNotSignedIn";
     }
 

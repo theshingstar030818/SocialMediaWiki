@@ -14,9 +14,8 @@ public class SigninController {
 
     @GetMapping("signin")
     public String signin(Principal principal) {
-        System.out.println("principal : " + principal);
         if(principal != null){
-            return "/";
+            return "home/homeSignedIn";
         }else {
             return "signin/signin";
         }
