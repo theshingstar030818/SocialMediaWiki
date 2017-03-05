@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.context.annotation.PropertySource;
 import sudopkill.account.Account;
+import sudopkill.provider.AuthProvider;
 
 /**
  * Created by tanzeelrana on 3/4/2017.
@@ -41,6 +42,6 @@ public class SignupForm {
     }
 
     public Account createAccount() {
-        return new Account(getEmail(), getPassword(), "ROLE_USER");
+        return new Account(getEmail(), getPassword(), "ROLE_USER", AuthProvider.LOCAL);
     }
 }
