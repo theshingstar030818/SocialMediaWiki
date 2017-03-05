@@ -65,7 +65,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/")).and().logout()
                 .logoutSuccessUrl("/").permitAll().and().csrf()
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
-                .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
+                .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class)
+                .formLogin()
+                .loginPage("/signin")
+                .permitAll()
+                .failureUrl("/signin?error=1")
+                .loginProcessingUrl("/authenticate")
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .permitAll()
+                .logoutSuccessUrl("/signin?logout")
+                .and()
+                .rememberMe()
+                .rememberMeServices(rememberMeServices())
+                .key("remember-me-key");
         // @formatter:on
     }
 
