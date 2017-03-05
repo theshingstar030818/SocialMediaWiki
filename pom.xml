@@ -135,6 +135,12 @@
 			<artifactId>webjars-locator</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>LATEST</version>
+		</dependency>
+
 	</dependencies>
 
 

@@ -2,6 +2,7 @@ package sudopkill.signup;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import sudopkill.account.Account;
 
 /**
  * Created by tanzeelrana on 3/4/2017.
@@ -36,7 +37,7 @@ public class SignupForm {
         this.password = password;
     }
 
-    public void createAccount(){
-        System.out.print("Create Account");
+    public Account createAccount(){
+        return new Account(getEmail(), getPassword(), "ROLE_USER");
     }
 }

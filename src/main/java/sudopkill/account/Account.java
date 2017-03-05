@@ -27,9 +27,7 @@ public class Account implements java.io.Serializable {
 
     private Instant created;
 
-    protected Account() {
-
-    }
+    protected Account() {}
 
     public Account(String email, String password, String role) {
         this.email = email;
