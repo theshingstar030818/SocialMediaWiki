@@ -14,5 +14,9 @@ This application is a mix of a wiki and a simple social network: a user can publ
   
 ## Sprint 1
 
+- Users will be able to sign up/login.
+- Users will be able to create a page.
+- Users will be able to view existing pages. 
+
 **Product Backlog**
 - 
