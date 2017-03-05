@@ -1,6 +1,6 @@
 # SocialMediaWiki
 
-## Sprint 1
+This application is a mix of a wiki and a simple social network: a user can publish a wiki page, “like” an existing page, and “follow” another user.
 
 ### Setting up environment
 
@@ -11,3 +11,8 @@
   2. Lookup compiler.automake.allow.when.app.running and enable it.
   3. File>Settings>Build, Execution, Deployment>Compiler(For current project)
   4. Select "Build project automatically" and "Compile independent modules in parallel"
+  
+## Sprint 1
+
+**Product Backlog**
+- 
