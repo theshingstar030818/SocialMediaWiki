@@ -2,11 +2,9 @@ package sudopkill.page;
 
 import sudopkill.account.Account;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.util.ArrayList;
+import javax.persistence.*;
+import java.time.Instant;
+import java.util.Set;
 
 /*
  * Created by markpineda on 3/5/2017.
@@ -23,21 +21,18 @@ public class Page {
     @GeneratedValue
     private long id;
 
-    //Page Creator
+    private String title;
+    private String content;
     private Account author;
+    private Instant created;
 
-    //Parent Page
+    @ManyToOne
     private Page parent;
 
-    //Page Title
-    private String title;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parent")
+    private Set<Page> childNodes;
 
-    //Page Content
-    private String content;
-
-    private long likes;
-
-    //accounts who liked page
-    private ArrayList<Account> accounts;
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Account> likes;
 
 }
