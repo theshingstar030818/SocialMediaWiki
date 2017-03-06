@@ -4,6 +4,7 @@ import sudopkill.account.Account;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Set;
 
 /*
@@ -35,4 +36,75 @@ public class Page {
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Account> likes;
 
+    public Page(){}
+
+    public Page(String title, String content, Account author, Page parent){
+        this.title = title;
+        this.content = content;
+        this.author = author;
+        this.parent = parent;
+        this.created = Instant.EPOCH;
+        this.childNodes = new HashSet<>();
+        this.likes = new HashSet<>();
+    }
+
+    public long getId(){
+        return id;
+    }
+
+    public String getTitle(){
+        return title;
+    }
+
+    public String getContent(){
+        return content;
+    }
+
+    public Account getAuthor() {
+        return author;
+    }
+
+    public Instant getCreated() {
+        return created;
+    }
+
+    public Page getParent() {
+        return parent;
+    }
+
+    public Set<Page> getChildNodes() {
+        return childNodes;
+    }
+
+    public Set<Account> getLikes() {
+        return likes;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setAuthor(Account author) {
+        this.author = author;
+    }
+
+    public void setCreated(Instant created) {
+        this.created = created;
+    }
+
+    public void setParent(Page parent) {
+        this.parent = parent;
+    }
+
+    public void setChildNodes(Set<Page> childNodes) {
+        this.childNodes = childNodes;
+    }
+
+    public void setLikes(Set<Account> likes) {
+        this.likes = likes;
+    }
 }
