@@ -4,10 +4,13 @@ package sudopkill.account;
  * Created by tanzeelrana on 3/5/2017.
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import sudopkill.provider.AuthProvider;
+import sudopkill.page.Page;
+import sudopkill.AuthProvider.AuthProvider;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 @SuppressWarnings("serial")
 @Entity
@@ -27,6 +30,18 @@ public class Account implements java.io.Serializable {
     @Column(nullable = false)
     private String authProvider;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Page> myPages;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Page> myLikes;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Account> following;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Account> followers;
+
     protected Account() {}
 
     public Account(String email, String password, String role, AuthProvider authProvider) {
@@ -35,6 +50,10 @@ public class Account implements java.io.Serializable {
         this.role = role;
         this.created = Instant.now();
         this.authProvider = authProvider.toString();
+        this.myPages = new HashSet<>();
+        this.myLikes = new HashSet<>();
+        this.following = new HashSet<>();
+        this.followers = new HashSet<>();
     }
 
     public Long getId() {
@@ -67,5 +86,45 @@ public class Account implements java.io.Serializable {
 
     public Instant getCreated() {
         return created;
+    }
+
+    public String getAuthProvider() {
+        return authProvider;
+    }
+
+    public Set<Page> getMyPages() {
+        return myPages;
+    }
+
+    public Set<Page> getMyLikes() {
+        return myLikes;
+    }
+
+    public Set<Account> getFollowing() {
+        return following;
+    }
+
+    public Set<Account> getFollowers() {
+        return followers;
+    }
+
+    public void setAuthProvider(String authProvider) {
+        this.authProvider = authProvider;
+    }
+
+    public void setMyPages(Set<Page> myPages) {
+        this.myPages = myPages;
+    }
+
+    public void setMyLikes(Set<Page> myLikes) {
+        this.myLikes = myLikes;
+    }
+
+    public void setFollowing(Set<Account> following) {
+        this.following = following;
+    }
+
+    public void setFollowers(Set<Account> followers) {
+        this.followers = followers;
     }
 }

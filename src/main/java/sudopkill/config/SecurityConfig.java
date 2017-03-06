@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -38,11 +39,15 @@ import java.util.List;
 
 @EnableOAuth2Client
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
 
     @Autowired
     OAuth2ClientContext oauth2ClientContext;
+
+    @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
 
     @Autowired
     private AccountService accountService;
@@ -74,7 +79,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .rememberMeServices(rememberMeServices())
                 .key("remember-me-key").and()
                 .exceptionHandling()
-                .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/")).and().logout()
+                .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/signin?error=1")).and().logout()
                 .logoutSuccessUrl("/signin?logout").permitAll().and().csrf()
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
                 .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
@@ -138,6 +143,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private Filter ssoFilter(ClientResources client, String path) {
         OAuth2ClientAuthenticationProcessingFilter oAuth2ClientAuthenticationFilter = new OAuth2ClientAuthenticationProcessingFilter(path);
         OAuth2RestTemplate oAuth2RestTemplate = new OAuth2RestTemplate(client.getClient(), oauth2ClientContext);
+
+        oAuth2ClientAuthenticationFilter.setApplicationEventPublisher(applicationEventPublisher);
+
         oAuth2ClientAuthenticationFilter.setRestTemplate(oAuth2RestTemplate);
         UserInfoTokenServices tokenServices = new UserInfoTokenServices(client.getResource().getUserInfoUri(),
                 client.getClient().getClientId());

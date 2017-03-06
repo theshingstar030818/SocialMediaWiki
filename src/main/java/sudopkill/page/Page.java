@@ -43,7 +43,7 @@ public class Page {
         this.content = content;
         this.author = author;
         this.parent = parent;
-        this.created = Instant.EPOCH;
+        this.created = Instant.now();
         this.childNodes = new HashSet<>();
         this.likes = new HashSet<>();
     }

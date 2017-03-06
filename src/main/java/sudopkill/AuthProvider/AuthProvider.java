@@ -1,4 +1,4 @@
-package sudopkill.provider;
+package sudopkill.AuthProvider;
 
 
 /**
