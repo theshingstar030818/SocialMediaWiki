@@ -21,7 +21,6 @@ public class FacebookAccount extends Account {
     private String birthday;
     private String cover;
     private String currency;
-    private String email;
     private String first_name;
     private String gender;
     private Boolean is_verified;
@@ -77,7 +76,6 @@ public class FacebookAccount extends Account {
         this.birthday = userProfile.getBirthday();
         this.cover = userProfile.getCover().getSource();
         this.currency = userProfile.getCurrency().getUserCurrency();
-        this.email = userProfile.getEmail();
         this.first_name = userProfile.getFirstName();
         this.gender = userProfile.getGender();
         this.is_verified = userProfile.isVerified();
@@ -115,11 +113,6 @@ public class FacebookAccount extends Account {
 
     public String getCurrency() {
         return currency;
-    }
-
-    @Override
-    public String getEmail() {
-        return email;
     }
 
     public String getFirst_name() {
