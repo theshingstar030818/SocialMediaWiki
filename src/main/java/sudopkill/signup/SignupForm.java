@@ -42,6 +42,6 @@ public class SignupForm {
     }
 
     public Account createAccount() {
-        return new Account(getEmail(), getPassword(), "ROLE_USER", AuthProvider.LOCAL);
+        return new Account(getEmail(), getPassword(), "ROLE_USER", AuthProvider.LOCAL.toString());
     }
 }

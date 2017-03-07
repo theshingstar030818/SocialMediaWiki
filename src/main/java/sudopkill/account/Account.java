@@ -15,45 +15,42 @@ import java.util.Set;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "ACCOUNT")
+@Inheritance
 public class Account implements java.io.Serializable {
 
     @Id
     @GeneratedValue
     private Long id;
+
     @Column(unique = true)
     private String email;
+
     @JsonIgnore
     private String password;
     private String role = "ROLE_USER";
-    private Instant created;
-
+    private Instant created = Instant.now();
     @Column(nullable = false)
     private String authProvider;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private Set<Page> myPages;
+    private Set<Page> myPages = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL)
-    private Set<Page> myLikes;
+    private Set<Page> myLikes = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL)
-    private Set<Account> following;
+    private Set<Account> myFollowing = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL)
-    private Set<Account> followers;
+    private Set<Account> myFollowers = new HashSet<>();
 
     protected Account() {}
 
-    public Account(String email, String password, String role, AuthProvider authProvider) {
+    public Account(String email, String password, String role, String authProvider) {
         this.email = email;
         this.password = password;
         this.role = role;
-        this.created = Instant.now();
-        this.authProvider = authProvider.toString();
-        this.myPages = new HashSet<>();
-        this.myLikes = new HashSet<>();
-        this.following = new HashSet<>();
-        this.followers = new HashSet<>();
+        this.authProvider = authProvider;
     }
 
     public Long getId() {
@@ -100,12 +97,12 @@ public class Account implements java.io.Serializable {
         return myLikes;
     }
 
-    public Set<Account> getFollowing() {
-        return following;
+    public Set<Account> getMyFollowing() {
+        return myFollowing;
     }
 
-    public Set<Account> getFollowers() {
-        return followers;
+    public Set<Account> getMyFollowers() {
+        return myFollowers;
     }
 
     public void setAuthProvider(String authProvider) {
@@ -120,11 +117,11 @@ public class Account implements java.io.Serializable {
         this.myLikes = myLikes;
     }
 
-    public void setFollowing(Set<Account> following) {
-        this.following = following;
+    public void setMyFollowing(Set<Account> myFollowing) {
+        this.myFollowing = myFollowing;
     }
 
-    public void setFollowers(Set<Account> followers) {
-        this.followers = followers;
+    public void setMyFollowers(Set<Account> myFollowers) {
+        this.myFollowers = myFollowers;
     }
 }

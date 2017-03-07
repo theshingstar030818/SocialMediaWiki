@@ -4,6 +4,7 @@ package sudopkill.account;
  * Created by tanzeelrana on 3/5/2017.
  */
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,6 +19,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sudopkill.AuthProvider.AuthProvider;
 
 import javax.annotation.PostConstruct;
 import java.util.Collections;
@@ -34,8 +36,8 @@ public class AccountService implements UserDetailsService {
 
     @PostConstruct
     protected void initialize() {
-//        save(new Account("user", "demo", "ROLE_USER"));
-//        save(new Account("admin", "admin", "ROLE_ADMIN"));
+        save(new Account("user", "demo", "ROLE_USER", AuthProvider.LOCAL.toString()));
+        save(new Account("admin", "admin", "ROLE_ADMIN", AuthProvider.LOCAL.toString()));
     }
 
     @Transactional
@@ -68,6 +70,11 @@ public class AccountService implements UserDetailsService {
 
     private GrantedAuthority createAuthority(Account account) {
         return new SimpleGrantedAuthority(account.getRole());
+    }
+
+    public Account getUser(String email){
+        Account account = accountRepository.findOneByEmail(email);
+        return account;
     }
 
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 public class AccountController {
@@ -35,5 +36,12 @@ public class AccountController {
     @Secured("ROLE_ADMIN")
     public Account account(@PathVariable("id") Long id) {
         return accountRepository.findOne(id);
+    }
+
+    @GetMapping("accounts")
+    @ResponseStatus(value = HttpStatus.OK)
+    @Secured("ROLE_ADMIN")
+    public List<Account> accounts() {
+        return accountRepository.findAll();
     }
 }
