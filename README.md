@@ -15,8 +15,10 @@ This application is a mix of a wiki and a simple social network: a user can publ
 ## Sprint 1
 
 - Users will be able to sign up/login.
-- Users will be able to create a page.
-- Users will be able to view existing pages. 
+- Users will be able to login using facebook accounts
+- Users will be able to login using their github accounts
+- Application will be connected to travis CI and deploy app to heroku
 
 **Product Backlog**
-- 
+- Users will be able to create a page.
+- Users will be able to view existing pages. 
