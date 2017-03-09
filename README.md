@@ -2,7 +2,7 @@
 
 This application is a mix of a wiki and a simple social network: a user can publish a wiki page, “like” an existing page, and “follow” another user.
 
-### Setting up environment
+## Setting up environment
 
 1. **Clone repo**  
 2. **Enable auto-import for intelliJ**
