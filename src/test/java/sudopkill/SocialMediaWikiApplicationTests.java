@@ -2,14 +2,26 @@ package sudopkill;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import sudopkill.AuthProvider.AuthProvider;
 import sudopkill.account.Account;
+import sudopkill.account.AccountService;
+
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SocialMediaWikiApplicationTests {
+
+	String email = "harisghauri@gmail.com";
+	String pass = "pass";
+	String role = "USER_ROLE";
+	String localRole = AuthProvider.LOCAL.toString();
+
+	@Autowired
+	AccountService accountService;
 
 	@Test
 	public void contextLoads() {
@@ -18,28 +30,27 @@ public class SocialMediaWikiApplicationTests {
 	@Test
 	public void addAccountPassingParams() throws Exception {
 
-		Account account = new Account("harisghauri@gmail.com", "pass", "USER_ROLE", AuthProvider.LOCAL.toString());
+		Account account = new Account(email, pass, localRole, localRole);
+		account = accountService.save(account);
 
-//		BuddyInfo buddy= new BuddyInfo();
-//		buddy.setName("Haris");
-//		buddy.setPhone_nummber("613");
-//
-//		AddressBook buddies = new AddressBook();
-//
-//		buddies.addBuddy(buddy);
-//
-//		assertEquals(buddies.getSize(),1);
+		assertEquals(account.getEmail(),email);
+//		assertEquals(account.getPassword(),pass);
+//		assertEquals(account.getRole(),role);
+		assertEquals(account.getAuthProvider(),localRole);
 
 	}
 
-	@Test
-	public void addAccountUsingSetters() throws Exception {
-		Account account = new Account();
-		account.setEmail("harisghauri@gmail.com");
-		account.setAuthProvider(AuthProvider.LOCAL.toString());
-		account.setPassword("pass");
-		account.setRole("USER_ROLE");
-
-
-	}
+//	@Test
+//	public void addAccountUsingSetters() throws Exception {
+//		Account account = new Account();
+//		account.setEmail(email+"2");
+//		account.setAuthProvider(localRole);
+//		account.setPassword(pass);
+//		account.setRole(role);
+//
+//		assertEquals(account.getEmail(),email);
+////		assertEquals(account.getPassword(),pass);
+////		assertEquals(account.getRole(),role);
+//		assertEquals(account.getAuthProvider(),localRole);
+//	}
 }
