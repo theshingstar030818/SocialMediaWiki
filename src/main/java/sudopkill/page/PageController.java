@@ -21,7 +21,7 @@ public class PageController {
         this.pageRepository = pageRepository;
     }
 
-    @GetMapping("page/{id}")
+    @GetMapping("pages/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     public Page page(@PathVariable("id") Long id) {
         return this.pageRepository.findOne(id);
