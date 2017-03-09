@@ -44,7 +44,7 @@ public class Account implements java.io.Serializable {
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Account> myFollowers = new HashSet<>();
 
-    protected Account() {}
+    public Account() {}
 
     public Account(String email, String password, String role, String authProvider) {
         this.email = email;
