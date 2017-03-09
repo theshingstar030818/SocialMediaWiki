@@ -109,4 +109,10 @@ public class Page {
     public void setLikes(Set<Account> likes) {
         this.likes = likes;
     }
+
+    public void addChildNode (Page page) {
+        this.childNodes.add(page);
+    }
+
 }
+
