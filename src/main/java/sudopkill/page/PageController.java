@@ -29,7 +29,7 @@ public class PageController {
         return pageRepository.findOne(id);
     }
 
-    @GetMapping("accounts")
+    @GetMapping("page")
     @ResponseStatus(value = HttpStatus.OK)
     public List<Page> pages() {
         return pageRepository.findAll();
