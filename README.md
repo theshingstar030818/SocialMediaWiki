@@ -22,3 +22,12 @@ This application is a mix of a wiki and a simple social network: a user can publ
 **Product Backlog**
 - Users will be able to create a page.
 - Users will be able to view existing pages. 
+
+## Sprint 2
+
+- User will be able to create a page.
+- User will be able to like a page.
+- User will be able to edit a page.
+- User will be able to follow other users. 
+
+**Product Backlog**
