@@ -12,8 +12,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PageRepository extends JpaRepository<Page, Long> {
 
+
     Page findOneById(Long id);
 
     @Query("select count(a) > 0 from Page a where a.id = :id")
     boolean exists(@Param("id") Long id);
+
 }

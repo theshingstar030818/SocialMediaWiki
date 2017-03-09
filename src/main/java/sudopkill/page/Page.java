@@ -7,6 +7,8 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
+
+
 /*
  * Created by markpineda on 3/5/2017.
  *
@@ -27,7 +29,7 @@ public class Page {
     private Account author;
     private Instant created;
 
-    @ManyToOne
+    @OneToOne
     private Page parent;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "parent")
