@@ -28,6 +28,8 @@ import java.util.Collections;
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class AccountService implements UserDetailsService {
 
+    private Account currentUser;
+
     @Autowired
     private AccountRepository accountRepository;
 
@@ -77,4 +79,11 @@ public class AccountService implements UserDetailsService {
         return account;
     }
 
+    public void setCurrentUser(Account currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    public Account getCurrentUser() {
+        return this.currentUser;
+    }
 }

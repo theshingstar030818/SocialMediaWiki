@@ -12,6 +12,7 @@ import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResour
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import sudopkill.account.Account;
 import sudopkill.config.ClientResources;
 
 import java.security.Principal;

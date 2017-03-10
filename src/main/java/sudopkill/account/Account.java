@@ -25,6 +25,8 @@ public class Account implements java.io.Serializable {
     @Column(unique = true)
     private String email;
 
+    private String name;
+
     @JsonIgnore
     private String password;
     private String role = "ROLE_USER";
@@ -51,6 +53,14 @@ public class Account implements java.io.Serializable {
         this.password = password;
         this.role = role;
         this.authProvider = authProvider;
+    }
+
+    public void follow(Account account){
+        this.myFollowing.add(account);
+    }
+
+    public void unfollow(Account account){
+        this.myFollowing.remove(account);
     }
 
     public Long getId() {
@@ -123,5 +133,13 @@ public class Account implements java.io.Serializable {
 
     public void setMyFollowers(Set<Account> myFollowers) {
         this.myFollowers = myFollowers;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
