@@ -1,47 +1,33 @@
 package sudopkill.account;
 
-/**
- * Created by tanzeelrana on 3/5/2017.
- */
-import org.springframework.http.HttpStatus;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
-@RestController
+/**
+ * Created by tanzeelrana on 3/10/2017.
+ */
+
+@Controller
 public class AccountController {
 
-    private final AccountRepository accountRepository;
-
-    public AccountController(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
+    @ModelAttribute("")
+    String module() {
+        return "";
     }
 
-    @GetMapping("account/current")
-    @ResponseStatus(value = HttpStatus.OK)
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
-    public Account currentAccount(Principal principal) {
-        Assert.notNull(principal);
-        return accountRepository.findOneByEmail(principal.getName());
-    }
-
-    @GetMapping("account/{id}")
-    @ResponseStatus(value = HttpStatus.OK)
-    @Secured("ROLE_ADMIN")
-    public Account account(@PathVariable("id") Long id) {
-        return accountRepository.findOne(id);
-    }
-
-    @GetMapping("accounts")
-    @ResponseStatus(value = HttpStatus.OK)
-    @Secured("ROLE_ADMIN")
-    public List<Account> accounts() {
-        return accountRepository.findAll();
+    @RequestMapping({"/account"})
+    String current(Principal principal) {
+        if(principal != null){
+            Map<String, String> map = new LinkedHashMap<>();
+            map.put("name", principal.getName());
+            return "home/homeSignedIn";
+        }else{
+            return "home/homeNotSignedIn";
+        }
     }
 }
