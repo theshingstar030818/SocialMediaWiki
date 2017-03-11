@@ -74,8 +74,8 @@ public class AccountService implements UserDetailsService {
         return new SimpleGrantedAuthority(account.getRole());
     }
 
-    public Account getUser(String email){
-        Account account = accountRepository.findOneByEmail(email);
+    public Account getUser(String id){
+        Account account = accountRepository.findOneById(id);
         return account;
     }
 

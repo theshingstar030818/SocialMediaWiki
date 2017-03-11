@@ -36,7 +36,6 @@ public class GithubAccount extends Account {
     private String received_events_url;
     private String type;
     private Boolean site_admin;
-    private String name;
     private String company;
     private String blog;
     private String location;
@@ -65,10 +64,13 @@ public class GithubAccount extends Account {
         this.tokenValue = details.getTokenValue();
         this.tokenType = details.getTokenType();
 
-        this.setEmail((String)dataMap.get("email"));
+
         this.setPassword("");
         this.setRole("ROLE_USER");
         this.setAuthProvider(AuthProvider.GITHUB.toString());
+        this.setId((String) dataMap.get("id"));
+        this.setName((String) dataMap.get("name"));
+        this.setEmail((String) dataMap.get("email"));
 
         this.github_id = (Integer) dataMap.get("id");
         this.login = (String) dataMap.get("login");
@@ -87,7 +89,7 @@ public class GithubAccount extends Account {
         this.received_events_url = (String) dataMap.get("received_events_url");
         this.type = (String) dataMap.get("type");
         this.site_admin = (Boolean) dataMap.get("site_admin");
-        this.name = (String) dataMap.get("name");
+
         this.company = (String) dataMap.get("company");
         this.blog = (String) dataMap.get("blog");
         this.location = (String) dataMap.get("location");
@@ -167,10 +169,6 @@ public class GithubAccount extends Account {
 
     public Boolean getSite_admin() {
         return site_admin;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public String getCompany() {

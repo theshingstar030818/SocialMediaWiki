@@ -23,7 +23,7 @@ public class AccountRestController {
         this.accountRepository = accountRepository;
     }
 
-    @GetMapping("account/current")
+    @GetMapping("api/account/current")
     @ResponseStatus(value = HttpStatus.OK)
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public Account currentAccount(Principal principal) {
@@ -31,14 +31,14 @@ public class AccountRestController {
         return accountRepository.findOneByEmail(principal.getName());
     }
 
-    @GetMapping("account/{id}")
+    @GetMapping("api/account/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     @Secured("ROLE_ADMIN")
     public Account account(@PathVariable("id") Long id) {
         return accountRepository.findOne(id);
     }
 
-    @GetMapping("accounts")
+    @GetMapping("api/accounts")
     @ResponseStatus(value = HttpStatus.OK)
     @Secured("ROLE_ADMIN")
     public List<Account> accounts() {

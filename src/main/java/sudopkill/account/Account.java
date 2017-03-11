@@ -19,8 +19,7 @@ import java.util.Set;
 public class Account implements java.io.Serializable {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    private String id;
 
     @Column(unique = true)
     private String email;
@@ -53,6 +52,11 @@ public class Account implements java.io.Serializable {
         this.password = password;
         this.role = role;
         this.authProvider = authProvider;
+
+        if(authProvider == AuthProvider.LOCAL.toString()){
+            this.id = email;
+            this.name = email;
+        }
     }
 
     public void follow(Account account){
@@ -63,7 +67,7 @@ public class Account implements java.io.Serializable {
         this.myFollowing.remove(account);
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
@@ -141,5 +145,9 @@ public class Account implements java.io.Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
