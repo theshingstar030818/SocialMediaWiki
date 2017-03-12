@@ -39,3 +39,5 @@ spring:
     username: sql9162980
     password: J2R6nwV4ZY
     driver-class-name: com.mysql.jdbc.Driver
+
+#    http://www.phpmyadmin.co/

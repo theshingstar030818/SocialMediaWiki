@@ -67,7 +67,7 @@ public class GithubAccount extends Account {
         this.setPassword("");
         this.setRole("ROLE_USER");
         this.setAuthProvider(AuthProvider.GITHUB.toString());
-        this.setId( (String) auth.getName() );
+        this.setId( auth.getName() );
         this.setName((String) dataMap.get("name"));
         this.setEmail((String) dataMap.get("email"));
         this.setAbout((String) dataMap.get("bio"));
