@@ -19,3 +19,23 @@ github:
     clientAuthenticationScheme: form
   resource:
     userInfoUri: https://api.github.com/user
+
+spring:
+  application:
+    name: SocialMediaWiki
+  profiles:
+      # The commented value for `active` can be replaced with valid spring profiles to load.
+      # Otherwise, it will be filled in by maven when building the WAR file
+      # Either way, it can be overridden by `--spring.profiles.active` value passed in the commandline or `-Dspring.profiles.active` set in `JAVA_OPTS`
+      active: prod
+
+  jpa:
+    database: MYSQL
+    hibernate:
+      ddl-auto: validate
+
+  datasource:
+    url: jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9162980
+    username: sql9162980
+    password: J2R6nwV4ZY
+    driver-class-name: com.mysql.jdbc.Driver

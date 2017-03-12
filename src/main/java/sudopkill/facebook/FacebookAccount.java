@@ -16,7 +16,6 @@ import javax.persistence.Entity;
 public class FacebookAccount extends Account {
 
     private String fb_id;
-    private String about;
     private String age_range;
     private String birthday;
     private String cover;
@@ -69,11 +68,15 @@ public class FacebookAccount extends Account {
         this.setRole("ROLE_USER");
         this.setAuthProvider(AuthProvider.FACEBOOK.toString());
         this.setName(userProfile.getName());
-        this.setId( (String) userProfile.getId());
+        this.setId(  (String) auth.getName()  );
         this.setEmail(userProfile.getEmail());
+        this.setAbout(userProfile.getAbout());
+        this.setProfilePicture("http://graph.facebook.com/" + userProfile.getId() + "/picture?type=square");
+
+        System.out.println("profile picture : " + this.getProfilePicture());
 
         this.fb_id = userProfile.getId();
-        this.about = userProfile.getAbout();
+
         this.age_range = userProfile.getAgeRange().name();
         this.birthday = userProfile.getBirthday();
         this.cover = userProfile.getCover().getSource();
@@ -95,10 +98,6 @@ public class FacebookAccount extends Account {
 
     public String getFb_id() {
         return fb_id;
-    }
-
-    public String getAbout() {
-        return about;
     }
 
     public String getAge_range() {

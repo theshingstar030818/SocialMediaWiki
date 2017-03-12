@@ -20,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sudopkill.AuthProvider.AuthProvider;
+import sudopkill.page.Page;
 
 import javax.annotation.PostConstruct;
 import java.util.Collections;
@@ -86,4 +87,12 @@ public class AccountService implements UserDetailsService {
     public Account getCurrentUser() {
         return this.currentUser;
     }
+
+    public void addMyPages(Page page){
+        if(this.currentUser != null){
+            this.currentUser.addMyPages(page);
+        }
+    }
+
+
 }

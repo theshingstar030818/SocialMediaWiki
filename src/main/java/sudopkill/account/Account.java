@@ -4,11 +4,14 @@ package sudopkill.account;
  * Created by tanzeelrana on 3/5/2017.
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.annotation.CreatedDate;
 import sudopkill.page.Page;
 import sudopkill.AuthProvider.AuthProvider;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.time.Instant;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,15 +27,17 @@ public class Account implements java.io.Serializable {
     @Column(unique = true)
     private String email;
 
-    private String name;
-
     @JsonIgnore
     private String password;
-    private String role = "ROLE_USER";
-    private Instant created = Instant.now();
     @Column(nullable = false)
     private String authProvider;
 
+    private String about = "";
+    private String name = "";
+    private String profilePicture = "http://ec2-52-11-47-52.us-west-2.compute.amazonaws.com/moodle/theme/image.php/clean/core/1475717594/u/f1";
+    private String role = "ROLE_USER";
+    private Instant created = Instant.now();
+    private Date created_at = new Date((Calendar.getInstance().getTime()).getTime());
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Page> myPages = new HashSet<>();
 
@@ -150,4 +155,53 @@ public class Account implements java.io.Serializable {
     public void setId(String id) {
         this.id = id;
     }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
+    public void addMyPages(Page page){
+        this.myPages.add(page);
+    }
+
+    public void addMyLikes(Page page){
+        this.myLikes.add(page);
+    }
+
+    public void addMyFollowing(Account account){
+        this.myFollowing.add(account);
+    }
+
+    public void addMyFollower(Account account){
+        this.myFollowers.add(account);
+    }
+
+    public void removeMyPages(Page page){
+        this.myPages.remove(page);
+    }
+
+    public void removeMyLikes(Page page){
+        this.myLikes.remove(page);
+    }
+
+    public void removeMyFollowing(Account account){
+        this.myFollowing.remove(account);
+    }
+
+    public void removeMyFollower(Account account){
+        this.myFollowers.remove(account);
+    }
+
 }

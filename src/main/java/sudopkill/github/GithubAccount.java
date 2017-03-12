@@ -64,17 +64,19 @@ public class GithubAccount extends Account {
         this.tokenValue = details.getTokenValue();
         this.tokenType = details.getTokenType();
 
-
         this.setPassword("");
         this.setRole("ROLE_USER");
         this.setAuthProvider(AuthProvider.GITHUB.toString());
-        this.setId((String) dataMap.get("id"));
+        this.setId( (String) auth.getName() );
         this.setName((String) dataMap.get("name"));
         this.setEmail((String) dataMap.get("email"));
+        this.setAbout((String) dataMap.get("bio"));
+        this.setProfilePicture((String) dataMap.get("avatar_url"));
+
 
         this.github_id = (Integer) dataMap.get("id");
         this.login = (String) dataMap.get("login");
-        this.avatar_url = (String) dataMap.get("avatar_url");
+
         this.gravatar_id = (String) dataMap.get("gravatar_id");
         this.url = (String) dataMap.get("url");
         this.html_url = (String) dataMap.get("html_url");
@@ -89,7 +91,7 @@ public class GithubAccount extends Account {
         this.received_events_url = (String) dataMap.get("received_events_url");
         this.type = (String) dataMap.get("type");
         this.site_admin = (Boolean) dataMap.get("site_admin");
-
+        this.avatar_url = (String) dataMap.get("avatar_url");
         this.company = (String) dataMap.get("company");
         this.blog = (String) dataMap.get("blog");
         this.location = (String) dataMap.get("location");
