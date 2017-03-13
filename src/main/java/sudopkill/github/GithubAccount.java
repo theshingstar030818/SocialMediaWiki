@@ -7,7 +7,6 @@ import sudopkill.account.Account;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import java.sql.Date;
 import java.util.LinkedHashMap;
 
 /**
@@ -45,8 +44,8 @@ public class GithubAccount extends Account {
     private int public_gists;
     private int followers;
     private int following;
-    private String created_at;
-    private String updated_at;
+//    private String created_at;
+//    private String updated_at;
 
     private String remoteAddress;
     private String sessionId;
@@ -101,8 +100,8 @@ public class GithubAccount extends Account {
         this.public_gists = (Integer) dataMap.get("public_gists");
         this.followers = (Integer) dataMap.get("followers");
         this.following = (Integer) dataMap.get("following");
-        this.created_at = (String) dataMap.get("created_at");
-        this.updated_at = (String) dataMap.get("updated_at");
+//        this.created_at = (String) dataMap.get("created_at");
+//        this.updated_at = (String) dataMap.get("updated_at");
     }
 
     public int getGithub_id() {
@@ -209,13 +208,13 @@ public class GithubAccount extends Account {
         return following;
     }
 
-    public String getCreated_at() {
-        return created_at;
-    }
-
-    public String getUpdated_at() {
-        return updated_at;
-    }
+//    public String getCreated_at() {
+//        return created_at;
+//    }
+//
+//    public String getUpdated_at() {
+//        return updated_at;
+//    }
 
     public String getRemoteAddress() {
         return remoteAddress;
