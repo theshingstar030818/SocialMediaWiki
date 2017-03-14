@@ -85,7 +85,7 @@ public class AccountController {
         System.out.println("need to follow the user id : " + userId);
 
         accountService.getCurrentUser().follow(user);
-        accountService.save(accountService.getCurrentUser());
+//        accountService.save(accountService.getCurrentUser());
 
         return "/account/account";
     }

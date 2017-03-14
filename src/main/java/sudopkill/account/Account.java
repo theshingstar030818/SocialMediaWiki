@@ -38,16 +38,17 @@ public class Account implements java.io.Serializable {
     private String role = "ROLE_USER";
     private Instant created = Instant.now();
     private Date created_at = new Date((Calendar.getInstance().getTime()).getTime());
-    @OneToMany(cascade = CascadeType.ALL)
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Page> myPages = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Page> myLikes = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Account> myFollowing = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Account> myFollowers = new HashSet<>();
 
     public Account() {}
@@ -65,7 +66,7 @@ public class Account implements java.io.Serializable {
     }
 
     public void follow(Account account){
-        this.myFollowing.add(account);
+        myFollowing.add(account);
     }
 
     public void unfollow(Account account){
@@ -108,18 +109,22 @@ public class Account implements java.io.Serializable {
         return authProvider;
     }
 
+    @OneToMany(mappedBy = "ACCOUNT", cascade = CascadeType.ALL)
     public Set<Page> getMyPages() {
         return myPages;
     }
 
+    @OneToMany(mappedBy = "ACCOUNT", cascade = CascadeType.ALL)
     public Set<Page> getMyLikes() {
         return myLikes;
     }
 
+    @OneToMany(mappedBy = "ACCOUNT", cascade = CascadeType.ALL)
     public Set<Account> getMyFollowing() {
         return myFollowing;
     }
 
+    @OneToMany(mappedBy = "ACCOUNT", cascade = CascadeType.ALL)
     public Set<Account> getMyFollowers() {
         return myFollowers;
     }
