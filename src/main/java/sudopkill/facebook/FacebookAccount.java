@@ -71,6 +71,7 @@ public class FacebookAccount extends Account {
         this.setId(  (String) auth.getName()  );
         this.setEmail(userProfile.getEmail());
         this.setAbout(userProfile.getAbout());
+        System.out.println("profile bio : " + userProfile.getAbout());
         this.setProfilePicture("http://graph.facebook.com/" + userProfile.getId() + "/picture?type=square");
 
         System.out.println("profile picture : " + this.getProfilePicture());

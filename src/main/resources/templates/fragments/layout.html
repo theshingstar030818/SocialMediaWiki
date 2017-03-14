@@ -34,7 +34,7 @@
                 </li>
 
                 <li th:if="${currentUser} != null" th:classappend="${module == 'account' ? 'active' : ''}">
-                    <a th:href="@{/account(id=${currentUser.getId()})}" th:text ="${currentUser.getName()}"></a>
+                    <a th:href="@{/account/}+${currentUser.getId()}" th:text ="${currentUser.getName()}"></a>
                 </li>
 
                 <li th:if="${#authorization.expression('isAuthenticated()')}">
