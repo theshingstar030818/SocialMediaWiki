@@ -6,6 +6,7 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
@@ -15,6 +16,11 @@ import java.util.List;
 @Service
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class PageService {
+
+    @PostConstruct
+    protected void initialize() {
+        save(new Page("BlankTest", "Test", null, null));
+    }
 
     @Autowired
     private PageRepository pageRepository;
