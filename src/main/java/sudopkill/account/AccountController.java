@@ -83,8 +83,8 @@ public class AccountController {
         model.addAttribute("id", userId);
         model.addAttribute("user", user);
 
-        accountService.getCurrentUser().follow(user);
-        accountService.update(accountService.getCurrentUser());
+        user.addMyFollower(accountService.getCurrentUser());
+        accountService.update(user);
 
         return "/account/account";
     }

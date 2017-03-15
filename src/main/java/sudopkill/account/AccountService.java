@@ -83,6 +83,7 @@ public class AccountService implements UserDetailsService {
     public Account getUser(String id){
         Account account = accountRepository.findOneById(id);
         return account;
+
     }
 
     public void setCurrentUser(Account currentUser) {

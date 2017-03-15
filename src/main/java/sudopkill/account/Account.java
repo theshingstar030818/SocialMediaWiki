@@ -3,10 +3,10 @@ package sudopkill.account;
 /**
  * Created by tanzeelrana on 3/5/2017.
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import sudopkill.AuthProvider.AuthProvider;
 import sudopkill.page.Page;
-
 import javax.persistence.*;
 import java.sql.Date;
 import java.time.Instant;
@@ -38,16 +38,13 @@ public class Account implements java.io.Serializable {
     private Instant created = Instant.now();
     private Date created_at = new Date((Calendar.getInstance().getTime()).getTime());
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Page> myPages = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Page> myLikes = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<Account> myFollowing = new HashSet<>();
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Account> myFollowers = new HashSet<>();
 
     public Account() {}
@@ -62,15 +59,6 @@ public class Account implements java.io.Serializable {
             this.id = email;
             this.name = email;
         }
-    }
-
-    public void follow(Account account){
-        myFollowing.add(account);
-        System.out.println("user : " + this.getName() + " has " + myFollowing.size() + " followers");
-    }
-
-    public void unfollow(Account account){
-        this.myFollowing.remove(account);
     }
 
     public String getId() {
@@ -120,11 +108,6 @@ public class Account implements java.io.Serializable {
     }
 
     @OneToMany(mappedBy = "ACCOUNT", cascade = CascadeType.ALL)
-    public Set<Account> getMyFollowing() {
-        return myFollowing;
-    }
-
-    @OneToMany(mappedBy = "ACCOUNT", cascade = CascadeType.ALL)
     public Set<Account> getMyFollowers() {
         return myFollowers;
     }
@@ -139,10 +122,6 @@ public class Account implements java.io.Serializable {
 
     public void setMyLikes(Set<Page> myLikes) {
         this.myLikes = myLikes;
-    }
-
-    public void setMyFollowing(Set<Account> myFollowing) {
-        this.myFollowing = myFollowing;
     }
 
     public void setMyFollowers(Set<Account> myFollowers) {
@@ -173,6 +152,11 @@ public class Account implements java.io.Serializable {
         return profilePicture;
     }
 
+    public Set<Account> getMyFollowing(){
+        Set<Account> retVal = new HashSet<Account>();
+        return retVal;
+    }
+
     public void setProfilePicture(String profilePicture) {
         this.profilePicture = profilePicture;
     }
@@ -185,10 +169,6 @@ public class Account implements java.io.Serializable {
         this.myLikes.add(page);
     }
 
-    public void addMyFollowing(Account account){
-        this.myFollowing.add(account);
-    }
-
     public void addMyFollower(Account account){
         this.myFollowers.add(account);
     }
@@ -199,10 +179,6 @@ public class Account implements java.io.Serializable {
 
     public void removeMyLikes(Page page){
         this.myLikes.remove(page);
-    }
-
-    public void removeMyFollowing(Account account){
-        this.myFollowing.remove(account);
     }
 
     public void removeMyFollower(Account account){
