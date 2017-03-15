@@ -4,7 +4,6 @@ package sudopkill.account;
  * Created by tanzeelrana on 3/5/2017.
  */
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -50,6 +49,12 @@ public class AccountService implements UserDetailsService {
         return account;
     }
 
+    @Transactional
+    public Account update(Account account){
+        account = accountRepository.save(account);
+        return account;
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account account = accountRepository.findOneByEmail(username);
@@ -81,6 +86,7 @@ public class AccountService implements UserDetailsService {
     }
 
     public void setCurrentUser(Account currentUser) {
+        System.out.println("current user has : " + currentUser.getMyFollowers().size() + " followers .");
         this.currentUser = currentUser;
     }
 

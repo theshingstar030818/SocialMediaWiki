@@ -4,9 +4,8 @@ package sudopkill.account;
  * Created by tanzeelrana on 3/5/2017.
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.data.annotation.CreatedDate;
-import sudopkill.page.Page;
 import sudopkill.AuthProvider.AuthProvider;
+import sudopkill.page.Page;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -67,6 +66,7 @@ public class Account implements java.io.Serializable {
 
     public void follow(Account account){
         myFollowing.add(account);
+        System.out.println("user : " + this.getName() + " has " + myFollowing.size() + " followers");
     }
 
     public void unfollow(Account account){

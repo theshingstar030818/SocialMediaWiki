@@ -82,10 +82,9 @@ public class AccountController {
         Account user = accountRepository.findOneById(userId);
         model.addAttribute("id", userId);
         model.addAttribute("user", user);
-        System.out.println("need to follow the user id : " + userId);
 
         accountService.getCurrentUser().follow(user);
-//        accountService.save(accountService.getCurrentUser());
+        accountService.update(accountService.getCurrentUser());
 
         return "/account/account";
     }
