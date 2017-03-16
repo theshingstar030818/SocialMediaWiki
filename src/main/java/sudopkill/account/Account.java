@@ -18,6 +18,7 @@ import java.util.Set;
 @Entity
 @Table(name = "ACCOUNT")
 @Inheritance
+@Access(AccessType.FIELD)
 public class Account implements java.io.Serializable {
 
     @Id
@@ -26,11 +27,13 @@ public class Account implements java.io.Serializable {
     @Column(unique = true)
     private String email;
 
+    @Column(unique = true)
+    private String username;
+
     @JsonIgnore
     private String password;
     @Column(nullable = false)
     private String authProvider;
-
     private String about = "";
     private String name = "";
     private String profilePicture = "http://ec2-52-11-47-52.us-west-2.compute.amazonaws.com/moodle/theme/image.php/clean/core/1475717594/u/f1";
@@ -44,21 +47,39 @@ public class Account implements java.io.Serializable {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Page> myLikes = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "ACCOUNT_MY_FOLLOWERS", joinColumns = { @JoinColumn(name = "ACCOUNT_ID") }, inverseJoinColumns = { @JoinColumn(name = "MY_FOLLOWERS_ID") })
     private Set<Account> myFollowers = new HashSet<>();
 
     public Account() {}
 
-    public Account(String email, String password, String role, String authProvider) {
+    public Account(String email, String username, String password, String role, String authProvider) {
         this.email = email;
+        this.username = username;
         this.password = password;
         this.role = role;
         this.authProvider = authProvider;
 
         if(authProvider == AuthProvider.LOCAL.toString()){
-            this.id = email;
-            this.name = email;
+            this.id = username;
+            this.name = username;
         }
+    }
+
+    public Set<Page> getMyPages() {
+        return myPages;
+    }
+
+    public Set<Page> getMyLikes() {
+        return myLikes;
+    }
+
+    public Set<Account> getMyFollowers() {
+        return myFollowers;
+    }
+
+    public void setAuthProvider(String authProvider) {
+        this.authProvider = authProvider;
     }
 
     public String getId() {
@@ -95,25 +116,6 @@ public class Account implements java.io.Serializable {
 
     public String getAuthProvider() {
         return authProvider;
-    }
-
-    @OneToMany(mappedBy = "ACCOUNT", cascade = CascadeType.ALL)
-    public Set<Page> getMyPages() {
-        return myPages;
-    }
-
-    @OneToMany(mappedBy = "ACCOUNT", cascade = CascadeType.ALL)
-    public Set<Page> getMyLikes() {
-        return myLikes;
-    }
-
-    @OneToMany(mappedBy = "ACCOUNT")
-    public Set<Account> getMyFollowers() {
-        return myFollowers;
-    }
-
-    public void setAuthProvider(String authProvider) {
-        this.authProvider = authProvider;
     }
 
     public void setMyPages(Set<Page> myPages) {
@@ -185,4 +187,11 @@ public class Account implements java.io.Serializable {
         this.myFollowers.remove(account);
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

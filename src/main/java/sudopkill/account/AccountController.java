@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import java.security.Principal;
 
 /**
@@ -30,7 +29,8 @@ public class AccountController {
 
     @RequestMapping(value = "/account/{userId}", method = RequestMethod.GET)
     String user(Principal principal, @PathVariable String userId, Model model) {
-        Account user = accountRepository.findOneById(userId);
+        System.out.println("userId : " + userId);
+        Account user = accountRepository.findOneByUsername(userId);
         model.addAttribute("id", userId);
         model.addAttribute("user", user);
         model.addAttribute("tab","all");
@@ -82,10 +82,8 @@ public class AccountController {
         Account user = accountRepository.findOneById(userId);
         model.addAttribute("id", userId);
         model.addAttribute("user", user);
-
         user.addMyFollower(accountService.getCurrentUser());
         accountService.update(user);
-
         return "/account/account";
     }
 }

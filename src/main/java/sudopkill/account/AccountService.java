@@ -38,8 +38,8 @@ public class AccountService implements UserDetailsService {
 
     @PostConstruct
     protected void initialize() {
-        save(new Account("user", "demo", "ROLE_USER", AuthProvider.LOCAL.toString()));
-        save(new Account("admin", "admin", "ROLE_ADMIN", AuthProvider.LOCAL.toString()));
+//        save(new Account("user", "demo", "ROLE_USER", AuthProvider.LOCAL.toString()));
+//        save(new Account("admin", "admin", "ROLE_ADMIN", AuthProvider.LOCAL.toString()));
     }
 
     @Transactional
@@ -57,14 +57,16 @@ public class AccountService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Account account = accountRepository.findOneByEmail(username);
+        Account account = accountRepository.findOneByUsername(username);
         if(account == null) {
             throw new UsernameNotFoundException("user not found");
         }
+        this.currentUser = account;
         return createUser(account);
     }
 
     public void signin(Account account) {
+
         SecurityContextHolder.getContext().setAuthentication(authenticate(account));
     }
 
@@ -73,7 +75,7 @@ public class AccountService implements UserDetailsService {
     }
 
     private User createUser(Account account) {
-        return new User(account.getEmail(), account.getPassword(), Collections.singleton(createAuthority(account)));
+        return new User(account.getUsername(), account.getPassword(), Collections.singleton(createAuthority(account)));
     }
 
     private GrantedAuthority createAuthority(Account account) {

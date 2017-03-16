@@ -69,6 +69,7 @@ public class FacebookAccount extends Account {
         this.setAuthProvider(AuthProvider.FACEBOOK.toString());
         this.setName(userProfile.getName());
         this.setId(  (String) auth.getName()  );
+        this.setUsername(  (String) auth.getName()  );
         this.setEmail(userProfile.getEmail());
         this.setAbout(userProfile.getAbout());
         System.out.println("profile bio : " + userProfile.getAbout());

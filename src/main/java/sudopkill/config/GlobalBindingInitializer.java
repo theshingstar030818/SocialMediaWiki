@@ -24,8 +24,10 @@ public class GlobalBindingInitializer {
 
     @ModelAttribute("currentUser")
     Account module(Principal principal) {
+        System.out.println("principal : " + principal);
         if(principal != null) {
-            Account currentUser = accountRepository.findOneById( principal.getName() );
+            Account currentUser = accountRepository.findOneByUsername( principal.getName() );
+            System.out.println("currentUser : " + currentUser);
             return  currentUser;
         }else{
             return null;

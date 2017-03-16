@@ -20,9 +20,9 @@ public class GithubAccount extends Account {
     private String login;
     private String avatar_url;
     private String gravatar_id;
-    @Column(unique = true)
+//    @Column(unique = true)
     private String url;
-    @Column(unique = true)
+//    @Column(unique = true)
     private String html_url;
     private String followers_url;
     private String following_url;
@@ -67,6 +67,7 @@ public class GithubAccount extends Account {
         this.setRole("ROLE_USER");
         this.setAuthProvider(AuthProvider.GITHUB.toString());
         this.setId( auth.getName() );
+        this.setUsername( auth.getName() );
         this.setName((String) dataMap.get("name"));
         this.setEmail((String) dataMap.get("email"));
         this.setAbout((String) dataMap.get("bio"));

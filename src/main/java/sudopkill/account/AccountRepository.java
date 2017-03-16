@@ -4,8 +4,6 @@ package sudopkill.account;
  * Created by tanzeelrana on 3/5/2017.
  */
 
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -24,8 +22,13 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
 
     Account findOneByEmail(String email);
     @Query("select count(a) > 0 from Account a where a.email = :email")
-    boolean exists(@Param("email") String email);
+    boolean existsEmail(@Param("email") String email);
 
+    Account findOneByUsername(String username);
+    @Query("select count(a) > 0 from Account a where a.username = :username")
+    boolean existsUsername(@Param("username") String username);
 
+    @Query("select c from Account c where (c.id = :id)")
+    List<Account> findByMyFollowingId(@Param("id")String id);
 
 }
