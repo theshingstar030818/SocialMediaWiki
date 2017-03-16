@@ -48,8 +48,10 @@ public class Account implements java.io.Serializable {
     private Set<Page> myLikes = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "ACCOUNT_MY_FOLLOWERS", joinColumns = { @JoinColumn(name = "ACCOUNT_ID") }, inverseJoinColumns = { @JoinColumn(name = "MY_FOLLOWERS_ID") })
     private Set<Account> myFollowers = new HashSet<>();
+
+    @ManyToMany(mappedBy = "myFollowers", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Account> myFollowing = new HashSet<>();
 
     public Account() {}
 
