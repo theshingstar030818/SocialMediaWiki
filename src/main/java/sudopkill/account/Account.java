@@ -107,7 +107,7 @@ public class Account implements java.io.Serializable {
         return myLikes;
     }
 
-    @OneToMany(mappedBy = "ACCOUNT", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "ACCOUNT")
     public Set<Account> getMyFollowers() {
         return myFollowers;
     }
