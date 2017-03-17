@@ -19,7 +19,7 @@ public class PageService {
 
     @PostConstruct
     protected void initialize() {
-        save(new Page("BlankTest", "Test", null, null));
+//        save(new Page("BlankTest", "Test", null, null));
     }
 
     @Autowired

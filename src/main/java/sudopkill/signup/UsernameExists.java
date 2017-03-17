@@ -1,9 +1,5 @@
 package sudopkill.signup;
 
-/**
- * Created by tanzeelrana on 3/5/2017.
- */
-
 import org.springframework.stereotype.Component;
 import sudopkill.account.AccountRepository;
 import javax.validation.Constraint;
@@ -13,17 +9,19 @@ import javax.validation.Payload;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
-
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
+/**
+ * Created by tanzeelrana on 3/16/2017.
+ */
 
 @Target({FIELD, ANNOTATION_TYPE})
 @Retention(RUNTIME)
-@Constraint(validatedBy = EmailExistsValidator.class)
+@Constraint(validatedBy = UsernameExistsValidator.class)
 @Documented
-public @interface EmailExists {
-
+public @interface UsernameExists {
     String message() default "";
 
     Class<?>[] groups() default {};
@@ -32,19 +30,19 @@ public @interface EmailExists {
 }
 
 @Component
-class EmailExistsValidator implements ConstraintValidator<EmailExists, String> {
+class UsernameExistsValidator implements ConstraintValidator<UsernameExists, String> {
 
     private final AccountRepository accountRepository;
 
-    public EmailExistsValidator(AccountRepository accountRepository) {
+    public UsernameExistsValidator(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
 
     @Override
-    public void initialize(EmailExists constraintAnnotation) {}
+    public void initialize(UsernameExists constraintAnnotation) {}
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        return !accountRepository.existsEmail(value);
+        return !accountRepository.existsUsername(value);
     }
 }
