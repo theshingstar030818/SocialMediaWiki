@@ -8,6 +8,7 @@ import sudopkill.AuthProvider.AuthProvider;
 import sudopkill.account.Account;
 
 import javax.persistence.Entity;
+import java.util.HashSet;
 
 /**
  * Created by tanzeelrana on 3/7/2017.
@@ -63,12 +64,15 @@ public class FacebookAccount extends Account {
         this.tokenValue = details.getTokenValue();
         this.tokenType = details.getTokenType();
 
+        this.setMyPages( new HashSet<>() );
+        this.setMyLikes( new HashSet<>() );
+        this.setMyFollowing( new HashSet<>() );
+        this.setMyFollowers( new HashSet<>() );
 
         this.setPassword("");
         this.setRole("ROLE_USER");
         this.setAuthProvider(AuthProvider.FACEBOOK.toString());
         this.setName(userProfile.getName());
-        this.setId(  (String) auth.getName()  );
         this.setUsername(  (String) auth.getName()  );
         this.setEmail(userProfile.getEmail());
         this.setAbout(userProfile.getAbout());

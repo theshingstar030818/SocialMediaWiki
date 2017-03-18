@@ -16,7 +16,7 @@ $(document).ready(function () {
         var $target = $(this).data('target');
         if ($target != 'all') {
             $('.table tr').css('display', 'none');
-            $('.table tr[data-status="' + $target + '"]').fadeIn('slow');
+            $('.table tr[data="' + $target + '"]').fadeIn('slow');
         } else {
             $('.table tr').css('display', 'none').fadeIn('slow');
         }

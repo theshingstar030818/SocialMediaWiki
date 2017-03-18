@@ -31,9 +31,9 @@ spring:
 
   datasource:
       driverClassName: com.mysql.jdbc.Driver
-      url: jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9164064
-      username: sql9164064
-      password: 4d2LydmE7k
+      url: jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9164416
+      username: sql9164416
+      password: EfHU3FEhGp
       continueOnError: true
       initialize: false
       initialSize: 0
@@ -52,7 +52,7 @@ spring:
         enable_lazy_load_no_trans: true
         dialect: org.hibernate.dialect.MySQL5Dialect
         hbm2ddl:
-          auto: create
+          auto: validate
         temp:
           use_jdbc_metadata_defaults: false
 
