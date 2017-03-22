@@ -22,36 +22,37 @@ import java.util.Set;
 public class Account implements java.io.Serializable {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public int id;
 
     @Column(unique = true)
-    private String email;
+    public String email;
 
     @Column(unique = true)
-    private String username;
+    public String username;
 
     @JsonIgnore
     private String password;
     @Column(nullable = false)
-    private String authProvider;
-    private String about = "";
-    private String name = "";
-    private String profilePicture = "http://ec2-52-11-47-52.us-west-2.compute.amazonaws.com/moodle/theme/image.php/clean/core/1475717594/u/f1";
-    private String role = "ROLE_USER";
-    private Instant created = Instant.now();
-    private Date created_at = new Date((Calendar.getInstance().getTime()).getTime());
+    public String authProvider;
+    public String about = "";
+    public String name = "";
+    public String profilePicture = "http://ec2-52-11-47-52.us-west-2.compute.amazonaws.com/moodle/theme/image.php/clean/core/1475717594/u/f1";
+    public String role = "ROLE_USER";
+    public Instant created = Instant.now();
+    public Date created_at = new Date((Calendar.getInstance().getTime()).getTime());
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Page> myPages = new HashSet<>();
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Page> myPages;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Page> myLikes = new HashSet<>();
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Page> myLikes;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Account> myFollowers = new HashSet<>();
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Account> myFollowers;
 
-    @ManyToMany(mappedBy = "myFollowers", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Account> myFollowing = new HashSet<>();
+    @ManyToMany(mappedBy = "myFollowers", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Account> myFollowing;
 
     public Account() {}
 
@@ -62,8 +63,12 @@ public class Account implements java.io.Serializable {
         this.role = role;
         this.authProvider = authProvider;
 
+        myFollowers = new HashSet<>();
+        myFollowing = new HashSet<>();
+        myLikes = new HashSet<>();
+        myPages = new HashSet<>();
+
         if(authProvider == AuthProvider.LOCAL.toString()){
-            this.id = username;
             this.name = username;
         }
     }
@@ -80,11 +85,41 @@ public class Account implements java.io.Serializable {
         return myFollowers;
     }
 
+    public void setMyFollowers(Set<Account> myFollowers) {
+        this.myFollowers = myFollowers;
+    }
+
+    public Set<Account> getMyFollowing(){
+        return this.myFollowing;
+    }
+
+    public void setMyFollowing(Set<Account> myFollowing) {
+        this.myFollowing = myFollowing;
+    }
+
+    public void addMyFollower(Account account){
+        this.myFollowers.add(account);
+    }
+
+    public void removeMyFollower(Account account){
+        this.myFollowers.remove(account);
+    }
+
+    public void addMyFollowing(Account account){
+        this.myFollowing.add(account);
+    }
+
+    public void removeMyFollowing(Account account){
+        this.myFollowing.remove(account);
+    }
+
+    public boolean hasFollower(Account account){ return this.myFollowers.contains(account); }
+
     public void setAuthProvider(String authProvider) {
         this.authProvider = authProvider;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -128,10 +163,6 @@ public class Account implements java.io.Serializable {
         this.myLikes = myLikes;
     }
 
-    public void setMyFollowers(Set<Account> myFollowers) {
-        this.myFollowers = myFollowers;
-    }
-
     public String getName() {
         return name;
     }
@@ -140,7 +171,7 @@ public class Account implements java.io.Serializable {
         this.name = name;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -156,11 +187,6 @@ public class Account implements java.io.Serializable {
         return profilePicture;
     }
 
-    public Set<Account> getMyFollowing(){
-        Set<Account> retVal = new HashSet<Account>();
-        return retVal;
-    }
-
     public void setProfilePicture(String profilePicture) {
         this.profilePicture = profilePicture;
     }
@@ -173,10 +199,6 @@ public class Account implements java.io.Serializable {
         this.myLikes.add(page);
     }
 
-    public void addMyFollower(Account account){
-        this.myFollowers.add(account);
-    }
-
     public void removeMyPages(Page page){
         this.myPages.remove(page);
     }
@@ -185,15 +207,35 @@ public class Account implements java.io.Serializable {
         this.myLikes.remove(page);
     }
 
-    public void removeMyFollower(Account account){
-        this.myFollowers.remove(account);
-    }
-
     public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (obj == null) {
+            return false;
+        }
+        if (!Account.class.isAssignableFrom(obj.getClass())) {
+            return false;
+        }
+        final Account other = (Account) obj;
+        if (this.id != (other.getId())) {
+            return false;
+        }
+        if (this.id != other.getId()) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return getId();
     }
 }

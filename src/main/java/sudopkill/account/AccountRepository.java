@@ -16,9 +16,9 @@ import java.util.List;
 @Transactional
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
-    Account findOneById(String id);
+    Account findOneById(int id);
     @Query("select count(a) > 0 from Account a where a.id = :id")
-    boolean idExists(@Param("id") String id);
+    boolean idExists(@Param("id") int id);
 
     Account findOneByEmail(String email);
     @Query("select count(a) > 0 from Account a where a.email = :email")

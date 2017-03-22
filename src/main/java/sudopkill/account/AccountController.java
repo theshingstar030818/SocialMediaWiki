@@ -27,63 +27,93 @@ public class AccountController {
         return "account";
     }
 
+
     @RequestMapping(value = "/account/{userId}", method = RequestMethod.GET)
-    String user(Principal principal, @PathVariable String userId, Model model) {
+    String user(Principal principal, @PathVariable int userId, Model model) {
         System.out.println("userId : " + userId);
-        Account user = accountRepository.findOneByUsername(userId);
+        Account user = accountRepository.findOneById(userId);
         model.addAttribute("id", userId);
         model.addAttribute("user", user);
+        model.addAttribute("following",user.hasFollower(accountService.getCurrentUser()));
         model.addAttribute("tab","all");
         return "/account/account";
     }
 
     @RequestMapping(value = "/account/{userId}/followers")
-    String followers(Principal principal, @PathVariable String userId, Model model){
+    String followers(Principal principal, @PathVariable int userId, Model model){
         Account user = accountRepository.findOneById(userId);
+
+
         model.addAttribute("id", userId);
         model.addAttribute("user", user);
+        model.addAttribute("following",user.hasFollower(accountService.getCurrentUser()));
         model.addAttribute("tab","followers");
         System.out.println("need to show all the followers for the user id : " + userId);
         return "/account/account";
     }
 
     @RequestMapping(value = "/account/{userId}/following")
-    String following(Principal principal, @PathVariable String userId, Model model){
+    String following(Principal principal, @PathVariable int userId, Model model){
         Account user = accountRepository.findOneById(userId);
+
+
         model.addAttribute("id", userId);
         model.addAttribute("user", user);
+        model.addAttribute("following",user.hasFollower(accountService.getCurrentUser()));
         model.addAttribute("tab","following");
         System.out.println("need to show all the following for the user id : " + userId);
         return "/account/account";
     }
 
     @RequestMapping(value = "/account/{userId}/pages")
-    String pages(Principal principal, @PathVariable String userId, Model model){
+    String pages(Principal principal, @PathVariable int userId, Model model){
         Account user = accountRepository.findOneById(userId);
         model.addAttribute("id", userId);
         model.addAttribute("user", user);
+        model.addAttribute("following",user.hasFollower(accountService.getCurrentUser()));
         model.addAttribute("tab","pages");
         System.out.println("need to show all the pages for the user id : " + userId);
         return "/account/account";
     }
 
     @RequestMapping(value = "/account/{userId}/likes")
-    String likes(Principal principal, @PathVariable String userId, Model model){
+    String likes(Principal principal, @PathVariable int userId, Model model){
         Account user = accountRepository.findOneById(userId);
         model.addAttribute("id", userId);
         model.addAttribute("user", user);
+        model.addAttribute("following",user.hasFollower(accountService.getCurrentUser()));
         model.addAttribute("tab","likes");
         System.out.println("need to show all the likes for the user id : " + userId);
         return "/account/account";
     }
 
     @RequestMapping(value = "/account/{userId}/follow")
-    String follow(Principal principal, @PathVariable String userId, Model model){
+    String follow(Principal principal, @PathVariable int userId, Model model){
         Account user = accountRepository.findOneById(userId);
         model.addAttribute("id", userId);
         model.addAttribute("user", user);
         user.addMyFollower(accountService.getCurrentUser());
+        accountService.getCurrentUser().addMyFollowing(user);
         accountService.update(user);
-        return "/account/account";
+        model.addAttribute("following",user.hasFollower(accountService.getCurrentUser()));
+        return "redirect:/account/" + userId ;
     }
+
+    @RequestMapping(value = "/account/{userId}/unfollow")
+    String unfollow(Principal principal, @PathVariable int userId, Model model){
+        Account user = accountRepository.findOneById(userId);
+        model.addAttribute("id", userId);
+        model.addAttribute("user", user);
+        user.removeMyFollower(accountService.getCurrentUser());
+        accountService.getCurrentUser().removeMyFollowing(user);
+        accountService.update(user);
+        model.addAttribute("following",user.hasFollower(accountService.getCurrentUser()));
+        return "redirect:/account/" + userId ;
+    }
+
+//    @RequestMapping(value = "/account/{userId}/update", method = RequestMethod.PUT)
+//    public String saveUpdate(@PathVariable int userId, @ModelAttribute("user") Account user) {
+//        accountService.update(user);
+//        return "redirect:/account/" + userId;
+//    }
 }

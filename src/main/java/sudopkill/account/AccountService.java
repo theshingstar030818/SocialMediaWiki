@@ -66,7 +66,6 @@ public class AccountService implements UserDetailsService {
     }
 
     public void signin(Account account) {
-
         SecurityContextHolder.getContext().setAuthentication(authenticate(account));
     }
 
@@ -83,13 +82,11 @@ public class AccountService implements UserDetailsService {
     }
 
     public Account getUser(String id){
-        Account account = accountRepository.findOneById(id);
+        Account account = accountRepository.findOneByUsername(id);
         return account;
-
     }
 
     public void setCurrentUser(Account currentUser) {
-        System.out.println("current user has : " + currentUser.getMyFollowers().size() + " followers .");
         this.currentUser = currentUser;
     }
 
