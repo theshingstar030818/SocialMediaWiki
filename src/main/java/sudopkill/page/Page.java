@@ -26,7 +26,10 @@ public class Page {
 
     private String title;
     private String content;
+
+    @OneToOne
     private Account author;
+
     private Instant created;
 
     @OneToOne
@@ -38,7 +41,11 @@ public class Page {
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Account> likes;
 
-    public Page(){}
+    public Page(){
+        this.created = Instant.now();
+        this.childNodes = new HashSet<>();
+        this.likes = new HashSet<>();
+    }
 
     public Page(String title, String content, Account author, Page parent){
         this.title = title;
