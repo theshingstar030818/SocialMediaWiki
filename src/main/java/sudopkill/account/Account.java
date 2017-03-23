@@ -42,7 +42,7 @@ public class Account implements java.io.Serializable {
     public Instant created = Instant.now();
     public Date created_at = new Date((Calendar.getInstance().getTime()).getTime());
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     private Set<Page> myPages;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
