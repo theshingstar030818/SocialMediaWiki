@@ -31,6 +31,11 @@ public class PageService {
         return page;
     }
 
+    @Transactional
+    public void deletePage(Page page) {
+        pageRepository.delete(page);
+    }
+
     public Page getPage(Long id){
         Page page = pageRepository.findOneById(id);
         return page;
