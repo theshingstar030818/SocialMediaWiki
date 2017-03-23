@@ -51,5 +51,6 @@ class SignupController {
         accountService.signin(account);
         MessageHelper.addSuccessAttribute(ra, "signup.success");
         return "redirect:/";
+        //return "/about";
     }
 }
