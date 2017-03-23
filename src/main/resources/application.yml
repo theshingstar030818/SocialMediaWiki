@@ -31,9 +31,9 @@ spring:
 
   datasource:
       driverClassName: com.mysql.jdbc.Driver
-      url: jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9164416
-      username: sql9164416
-      password: EfHU3FEhGp
+      url: jdbc:mysql://tanzeelrana.me:3306/socialmediawikiDB_haris
+      username: user
+      password: pass
       continueOnError: true
       initialize: false
       initialSize: 0
@@ -43,9 +43,6 @@ spring:
 
   jpa:
     show-sql: true
-#    hibernate:
-#      ddl-auto: none
-#      naming_strategy: org.hibernate.cfg.DefaultNamingStrategy
     properties:
       hibernate:
         event.merge.entity_copy_observer: allow
