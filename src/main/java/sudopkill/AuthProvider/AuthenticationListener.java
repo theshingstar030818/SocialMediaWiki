@@ -45,13 +45,14 @@ public class AuthenticationListener implements ApplicationListener<InteractiveAu
     public void onApplicationEvent(final InteractiveAuthenticationSuccessEvent event) {
         logger.info("$$$$$$$$$ InteractiveAuthenticationSuccessEvent $$$$$$$$$");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Account currentUser;
+        Account currentUser = null;
         if(!auth.getClass().equals(UsernamePasswordAuthenticationToken.class)){
             OAuth2Request oAuth2Request = ((OAuth2Authentication) auth).getOAuth2Request();
             currentUser = getOAuthUserAccount(oAuth2Request, (OAuth2Authentication) auth);
             System.out.println(auth.getName());
-            accountService.setCurrentUser(currentUser);
+
         }
+        accountService.setCurrentUser(accountService.getUser(auth.getName()));
         System.out.println("user name : "+accountService.getCurrentUser().getName());
     }
 

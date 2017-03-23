@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.context.request.WebRequest;
 import sudopkill.account.Account;
 import sudopkill.account.AccountRepository;
+import sudopkill.page.PageService;
 
 import java.security.Principal;
 
@@ -22,6 +23,9 @@ public class GlobalBindingInitializer {
     @Autowired
     AccountRepository accountRepository;
 
+    @Autowired
+    PageService pageService;
+
     @ModelAttribute("currentUser")
     Account module(Principal principal) {
         System.out.println("principal : " + principal);
@@ -32,6 +36,11 @@ public class GlobalBindingInitializer {
         }else{
             return null;
         }
+    }
+
+    @ModelAttribute("pageService")
+    PageService module() {
+        return pageService;
     }
 
     @InitBinder

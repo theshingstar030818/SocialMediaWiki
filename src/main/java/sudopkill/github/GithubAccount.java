@@ -7,6 +7,7 @@ import sudopkill.account.Account;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 
 /**
@@ -63,10 +64,14 @@ public class GithubAccount extends Account {
         this.tokenValue = details.getTokenValue();
         this.tokenType = details.getTokenType();
 
+        this.setMyPages( new HashSet<>() );
+        this.setMyLikes( new HashSet<>() );
+        this.setMyFollowing( new HashSet<>() );
+        this.setMyFollowers( new HashSet<>() );
+
         this.setPassword("");
         this.setRole("ROLE_USER");
         this.setAuthProvider(AuthProvider.GITHUB.toString());
-        this.setId( auth.getName() );
         this.setUsername( auth.getName() );
         this.setName((String) dataMap.get("name"));
         this.setEmail((String) dataMap.get("email"));

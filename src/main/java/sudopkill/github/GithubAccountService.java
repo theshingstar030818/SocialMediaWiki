@@ -27,7 +27,7 @@ public class GithubAccountService{
 
         UsernamePasswordAuthenticationToken upat = (UsernamePasswordAuthenticationToken)auth.getUserAuthentication();
         LinkedHashMap upatMap = (LinkedHashMap)upat.getDetails();
-        Account account = accountService.getUser((String)upatMap.get("email"));
+        Account account = accountService.getUser((String)upatMap.get("login"));
         if(account != null){
             return account;
         }else{

@@ -49,6 +49,7 @@ class SignupController {
         }
         Account account = accountService.save(signupForm.createAccount());
         accountService.signin(account);
+        accountService.setCurrentUser(account);
         MessageHelper.addSuccessAttribute(ra, "signup.success");
         return "redirect:/";
         //return "/about";
