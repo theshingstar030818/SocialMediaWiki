@@ -27,6 +27,9 @@
                 <li th:classappend="${module == 'page' ? 'active' : ''}">
                     <a href="#page" th:href="@{/page}">Pages</a>
                 </li>
+                <li th:classappend="${module == 'user' ? 'active' : ''}">
+                    <a href="#user" th:href="@{/users}">Users</a>
+                </li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
