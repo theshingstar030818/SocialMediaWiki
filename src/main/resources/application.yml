@@ -49,7 +49,7 @@ spring:
         enable_lazy_load_no_trans: true
         dialect: org.hibernate.dialect.MySQL5Dialect
         hbm2ddl:
-          auto: validate
+          auto: create
         temp:
           use_jdbc_metadata_defaults: false
 

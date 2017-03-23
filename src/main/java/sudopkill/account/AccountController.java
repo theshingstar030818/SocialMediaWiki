@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import java.security.Principal;
+import java.util.ArrayList;
 
 /**
  * Created by tanzeelrana on 3/10/2017.
@@ -110,6 +111,16 @@ public class AccountController {
         model.addAttribute("following",user.hasFollower(accountService.getCurrentUser()));
         return "redirect:/account/" + userId ;
     }
+
+
+    @RequestMapping(value = "/users")
+    public String user(Model model){
+        ArrayList<Account> accounts = new ArrayList<Account>(accountRepository.findAll());
+        model.addAttribute("users", accounts);
+        return "/account/users";
+    }
+
+
 
 //    @RequestMapping(value = "/account/{userId}/update", method = RequestMethod.PUT)
 //    public String saveUpdate(@PathVariable int userId, @ModelAttribute("user") Account user) {
