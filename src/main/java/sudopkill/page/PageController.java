@@ -43,9 +43,10 @@ public class PageController {
 
     @RequestMapping(value = "/createPage", method = RequestMethod.POST)
     public String createPage(@ModelAttribute Page page){
+
         page.setAuthor(accountService.getCurrentUser());
-        pageRepository.save(page);
-        return "page/page";
+        page = pageRepository.save(page);
+        return "redirect:/page";
     }
 
     @RequestMapping(value = "/page/{pageId+1}/editPage", method = RequestMethod.POST)
