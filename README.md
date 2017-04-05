@@ -44,3 +44,19 @@ This application is a mix of a wiki and a simple social network: a user can publ
 #### Search 
 - User can search for users and pages.
 
+## Sprint 2
+
+### Tasks
+
+#### Users
+- Ranking/Sorting
+- Search
+
+#### Pages
+- Edit/Delete 
+- Ranking/Sorting
+- Search
+
+#### Database
+- Prod
+
