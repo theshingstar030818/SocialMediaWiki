@@ -11,6 +11,8 @@
     <link href="../../static/css/account.css" rel="stylesheet" media="screen" th:href="@{/css/account.css}" />
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"  type='text/css'>
 
+    <!--<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>-->
+
     <script src="../../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
     <script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
     <script src="../../static/js/docs.js" th:src="@{/js/docs.js}"></script>
@@ -19,92 +21,63 @@
 <body>
 <div th:replace="fragments/layout :: header"></div>
 
+<style>
+    .lr-sticky-header {
+        color: white;
+        background: lightblue;
+        transition: all 0.6s;
+    }
+    #scrollPanel {
+        height: 500px;
+        overflow-y: auto;
+    }
+</style>
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center">stick me please !!!!</h2>
+            <div id="scrollPanel">
+                <table class="table table-bordered">
+                    <thead>
 
-    <ul class="list-group" th:each="u : ${users}" >
-        <li>
-            <div class="list-group-item justify-content-between">
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <!--<img class="media-object" src="http://placekitten.com/150/150">-->
-                        <div id="carousel-1" class="carousel slide slide-carousel" data-ride="carousel">
-                            <!-- Indicators -->
-                            <ol class="carousel-indicators">
-                                <li data-target="#carousel-1" data-slide-to="0" class="active"></li>
-                                <li data-target="#carousel-1" data-slide-to="1"></li>
-                                <li data-target="#carousel-1" data-slide-to="2"></li>
-                            </ol>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th class="headerSort headerSortDown" tabindex="0" role="columnheader button" title="Sort descending">Name
+                            </th>
+                            <th class="headerSort" tabindex="0" role="columnheader button" title="Sort ascending">Name</th>
+                            <th class="headerSort" tabindex="0" role="columnheader button" title="Sort ascending">Year</th>
+                            <th class="headerSort" tabindex="0" role="columnheader button" title="Sort ascending">ccTLD</th>
+                            <th width="120" class="headerSort" tabindex="0" role="columnheader button" title="Sort ascending"><span class="nowrap">ISO 3166-2</span>
+                            </th>
+                            <th class="" title="">Notes</th>
+                        </tr>
 
-                            <!-- Wrapper for slides -->
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <img src="http://lorempixel.com/150/150?rand=1" alt="Image">
-                                </div>
-                                <div class="item">
-                                    <img src="http://lorempixel.com/150/150?rand=2" alt="Image">
-                                </div>
-                                <div class="item">
-                                    <img src="http://lorempixel.com/150/150?rand=3" alt="Image">
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="media-body">
-                        <div class="media-heading">
-                            <div class="testimonials">
-                                <div class="active item">
-                                    <div class="carousel-info">
-                                        <img alt="" src="http://keenthemes.com/assets/bootsnipp/img1-small.jpg" class="pull-left">
-                                        <div class="pull-left">
-                                            <span class="testimonials-name">Lina Mars</span>
-                                            <span class="testimonials-post">Commercial Director</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--<p class="text-right">By Francisco</p>-->
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate.
-                            Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis
-                            dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan.
-                            Aliquam in felis sit amet augue.</p>
-                    </div>
-                    <hr>
-                    <div class="slide-footer">
-                        <ul class="list-inline list-unstyled">
-                            <li><span><i class="glyphicon glyphicon-calendar"></i> 2 days, 8 hours </span></li>
-                            <li>|</li>
-                            <span><i class="glyphicon glyphicon-comment"></i> 2 comments</span>
-                            <li>|</li>
-                            <li>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                            </li>
-                            <li>|</li>
-                            <li>
-                                <!-- Use Font Awesome http://fortawesome.github.io/Font-Awesome/ -->
-                                <span><i class="fa fa-facebook-square"></i></span>
-                                <span><i class="fa fa-twitter-square"></i></span>
-                                <span><i class="fa fa-google-plus-square"></i></span>
-                            </li>
-                            <li>
-                                <span class="label label-default">Welcome</span> <span class="label label-default">Updates</span> <span class="label label-default">July</span>
-                            </li>
+                        <tr th:each="u : ${users}">
+                            <td ><span style="font-family: monospace, monospace;" th:utext="${u.getUsername()}" ></span></td>
+                            <td><a href="/wiki/United_Arab_Emirates" title="United Arab Emirates">United Arab Emirates</a></td>
+                            <td>1974</td>
+                            <td><a href="/wiki/.ae" title=".ae">.ae</a></td>
+                            <td><span class="nowrap"><a href="/wiki/ISO_3166-2:AE" title="ISO 3166-2:AE">ISO 3166-2:AE</a></span></td>
+                            <td></td>
+                        </tr>
 
-                            <span class="pull-right buttons">
-                                        <button class="btn btn-sm btn-default"><i class="fa fa-eye"></i> View</button>
-                                        <button class="btn btn-sm btn-primary"><i class="fa fa-pencil-square-o"></i> Edit</button>
-                                        <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</button>
-                                    </span>
-                        </ul>
-                    </div>
-                </div>
+                    </tbody>
+                    <tfoot></tfoot>
+                </table>
             </div>
-        </li>
-    </ul>
+        </div>
+    </div>
+
+
+    <script src="../../static/js/lrStickyHeader.js" th:src="@{/js/lrStickyHeader.js}"></script>
+    <script>
+        var tables = document.getElementsByTagName('table');
+        console.log(tables);
+        lrStickyHeader(tables[0], {parent: document.getElementById('scrollPanel')});
+    </script>
+
 
 </div>
 
