@@ -56,4 +56,11 @@ public class PageController {
     public String page(){
         return "/page/page";
     }
+
+    @RequestMapping(value ="/page/deletePage/{pageId}", method = RequestMethod.GET)
+    String deletePage(@PathVariable Long pageId){
+        pageRepository.delete(pageId);
+        return "redirect:/page";
+    }
+
 }
