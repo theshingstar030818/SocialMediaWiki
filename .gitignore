@@ -25,3 +25,4 @@ nbdist/
 
 ### Config file ###
 /src/main/resources/application.yml
+
