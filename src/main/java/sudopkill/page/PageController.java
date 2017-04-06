@@ -68,23 +68,42 @@ public class PageController {
     @RequestMapping(value = "/page/sort/{sortType}")
     public String sort(Model model, @PathVariable String sortType){
 
+        ArrayList<Page> pages;
+        model.addAttribute("accountService", accountService);
         switch (sortType){
             case "mostLiked":
                 //do blah
+                pages = new ArrayList<Page>(pageRepository.sortByMostLiked());
                 System.out.println("Sort by most liked");
                 break;
             case "mostRecent":
                 //do blah
                 System.out.println("Sort by most recent");
+                pages = new ArrayList<Page>(pageRepository.findAll());
                 break;
             default:
+                pages = new ArrayList<Page>(pageRepository.findAll());
                 break;
         }
-
-        ArrayList<Page> pages = new ArrayList<Page>(pageRepository.findAll());
         model.addAttribute("pages", pages);
         return "/page/page";
     }
+
+
+
+    @RequestMapping(value ="/page/like/{pageId}", method = RequestMethod.GET)
+    String likePage(@PathVariable Long pageId){
+        accountService.addlike(pageService.getPage(pageId));
+        return "redirect:/page";
+    }
+
+    @RequestMapping(value ="/page/unlike/{pageId}", method = RequestMethod.GET)
+    String unlikePage(@PathVariable Long pageId){
+        accountService.removelike(pageService.getPage(pageId));
+        return "redirect:/page";
+    }
+
+
 
 
     @RequestMapping(value ="/page/deletePage/{pageId}", method = RequestMethod.GET)

@@ -101,4 +101,17 @@ public class AccountService implements UserDetailsService {
     }
 
 
+    public void addlike(Page page){
+        if(this.currentUser != null){
+            this.currentUser.addMyLikes(page);
+        }
+    }
+
+    public void removelike(Page page){
+        if(this.currentUser != null){
+            this.currentUser.removeMyLikes(page);
+        }
+    }
+
+
 }
