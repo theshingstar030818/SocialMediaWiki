@@ -119,6 +119,8 @@ public class AccountController {
     @RequestMapping(value = "/users")
     public String user(Model model){
         ArrayList<Account> accounts = new ArrayList<Account>(accountRepository.findAll());
+       // accounts = new ArrayList<>(accountRepository.findAll());
+        accounts = new ArrayList<>(accountRepository.findAllByMyFollowers());
         model.addAttribute("users", accounts);
         return "/account/users";
     }

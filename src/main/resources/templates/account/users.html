@@ -46,9 +46,14 @@
                         <tr>
                             <th class="headerSort headerSortDown" tabindex="0" role="columnheader button" title="Sort descending">Name
                             </th>
+
+
+                            <button class="btn"> Sort me </button>
+                            <br>
+                            <button class="btn"> Sort me another way </button>
                             <th class="headerSort" tabindex="0" role="columnheader button" title="Sort ascending">Name</th>
-                            <th class="headerSort" tabindex="0" role="columnheader button" title="Sort ascending">Year</th>
-                            <th class="headerSort" tabindex="0" role="columnheader button" title="Sort ascending">ccTLD</th>
+                            <th class="headerSort" tabindex="0" role="columnheader button" title="Sort ascending">Number of Followers</th>
+                            <th class="headerSort" tabindex="0" role="columnheader button" title="Sort ascending">Number of Pages</th>
                             <th width="120" class="headerSort" tabindex="0" role="columnheader button" title="Sort ascending"><span class="nowrap">ISO 3166-2</span>
                             </th>
                             <th class="" title="">Notes</th>
@@ -56,6 +61,7 @@
 
                         <tr th:each="u : ${users}">
                             <td ><span style="font-family: monospace, monospace;" th:utext="${u.getUsername()}" ></span></td>
+                            <td ><span style="font-family: monospace, monospace;" th:utext="${u.getMyFollowers().size()}" ></span></td>
                             <td><a href="/wiki/United_Arab_Emirates" title="United Arab Emirates">United Arab Emirates</a></td>
                             <td>1974</td>
                             <td><a href="/wiki/.ae" title=".ae">.ae</a></td>

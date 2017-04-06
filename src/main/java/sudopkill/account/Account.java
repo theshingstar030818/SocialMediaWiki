@@ -54,6 +54,8 @@ public class Account implements java.io.Serializable {
     @ManyToMany(mappedBy = "myFollowers", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Account> myFollowing;
 
+   // private int numFollowers;
+
     public Account() {}
 
     public Account(String email, String username, String password, String role, String authProvider) {
