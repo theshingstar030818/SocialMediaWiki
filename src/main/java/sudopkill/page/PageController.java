@@ -76,4 +76,11 @@ public class PageController {
         return "page/editPage";
     }
 
+    @RequestMapping(value ="/page/viewPage/{pageId}", method = RequestMethod.GET)
+    public String viewPage(Model model, @PathVariable Long pageId){
+        Page page = pageRepository.findOneById(pageId);
+        model.addAttribute("page", page);
+        return "page/viewPage";
+    }
+
 }

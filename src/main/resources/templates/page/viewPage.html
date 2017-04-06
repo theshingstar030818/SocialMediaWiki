@@ -21,56 +21,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
-
-
-                <div class="col-sm-12">
-                    <div class="col-xs-6 col-sm-4 text-center">
-                        <button type="button" class="btn btn-block btn-default dropdown-toggle" data-toggle="dropdown">
-                            <span>Menu</span>
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-
-                            <li class="">
-                                <a th:href="@{/createPage}"></span> Create Page </a>
-                            </li>
-                            <li class="divider"></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-xs-6 col-sm-4 text-center">
-                        <button type="button" class="btn btn-block btn-default dropdown-toggle" data-toggle="dropdown">
-                            <span>Sort By</span>
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-
-                            <li class="">
-                                <a th:href="@{/sort/mostLiked}"></span> Most Liked </a>
-                            </li>
-                            <li class="divider"></li>
-
-                            <li class="">
-                                <a th:href="@{/sort/mostRecent}"></span> Most Recent </a>
-                            </li>
-                            <li class="divider"></li>
-
-                            <li class="">
-                                <a th:href="@{/sort/mostEdited}"></span> Most Edited </a>
-                            </li>
-                            <li class="divider"></li>
-                        </ul>
-                    </div>
-                </div>
-
-
-
-            </div>
-        </div>
-
-        <ul class="list-group" th:each="p : ${pageService.getAllPages()}" >
-            <li>
+            <div class="col-sm-12">
                 <div class="list-group-item justify-content-between">
                     <div class="media">
                         <a class="pull-left" href="#">
@@ -102,24 +53,24 @@
                                 <div class="testimonials">
                                     <div class="active item">
                                         <div class="carousel-info">
-                                            <img alt="" th:src="${p.getAuthor().getProfilePicture()}" class="pull-left">
+                                            <img alt="" th:src="${page.getAuthor().getProfilePicture()}" class="pull-left">
                                             <div class="pull-left">
-                                                <span class="testimonials-name">[[${p.getTitle()}]]</span>
-                                                <span class="testimonials-post">Author: <a th:href="@{/account/}+${p.getAuthor().getId()}">[[${p.getAuthor().getName()}]]</a></span>
+                                                <span class="testimonials-name">[[${page.getTitle()}]]</span>
+                                                <span class="testimonials-post">Author: <a th:href="@{/account/}+${page.getAuthor().getId()}">[[${page.getAuthor().getName()}]]</a></span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!--<p class="text-right">By Francisco</p>-->
-                            <p>[[${p.getContent()}]]</p>
+                            <p>[[${page.getContent()}]]</p>
                         </div>
                         <hr>
                         <div class="slide-footer">
                             <ul class="list-inline list-unstyled">
-                                <li><span><i class="glyphicon glyphicon-calendar"></i> Created on [[${p.getCreated()}]] </span></li>
+                                <li><span><i class="glyphicon glyphicon-calendar"></i> Created on [[${page.getCreated()}]] </span></li>
                                 <li>|</li>
-                                <span><i class="glyphicon glyphicon-thumbs-up"></i> [[${p.getLikes().size()}]] likes</span>
+                                <span><i class="glyphicon glyphicon-thumbs-up"></i> [[${page.getLikes().size()}]] likes</span>
 
                                 <li>|</li>
                                 <li>
@@ -142,24 +93,21 @@
 
 
                                 <span class="pull-right buttons" >
-                                    <form method="get" th:action="@{/page/viewPage/}+${p.getId()}" style="display: inline">
-                                        <button class="btn btn-sm btn-default"><i class="fa fa-eye"></i> View</button>
-                                    </form>
-                                    <form method="get" th:action="@{/page/editPage/}+${p.getId()}" style="display: inline">
-                                        <button class="btn btn-sm btn-primary"><i class="fa fa-pencil-square-o"></i> Edit</button>
-                                    </form>
-                                    <form method="get" th:action="@{/page/deletePage/}+${p.getId()}" style="display: inline">
-                                        <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</button>
-                                    </form>
-                                </span>
+                                <form method="get" th:action="@{/page/editPage/}+${page.getId()}" style="display: inline">
+                                    <button class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-ok"></i> Like</button>
+                                </form>
+                                <form method="get" th:action="@{/page/deletePage/}+${page.getId()}" style="display: inline">
+                                    <button class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i> Dislike</button>
+                                </form>
+                            </span>
                             </ul>
                         </div>
                     </div>
                 </div>
-            </li>
-        </ul>
-
+            </div>
+        </div>
     </div>
+
 
     <div th:replace="fragments/layout :: footer"></div>
     </body>
