@@ -20,4 +20,7 @@ public interface PageRepository extends JpaRepository<Page, Long> {
     Page findOneByTitle(String title);
     @Query("select count(a) > 0 from Page a where a.title = :title")
     boolean exists(@Param("title") String title);
+
+
+
 }

@@ -47,17 +47,17 @@
                         <ul class="dropdown-menu" role="menu">
 
                             <li class="">
-                                <a th:href="@{/sort/mostLiked}"></span> Most Liked </a>
+                                <a th:href="@{/page/sort/}+${'mostLiked'}"></span> Most Liked </a>
                             </li>
                             <li class="divider"></li>
 
                             <li class="">
-                                <a th:href="@{/sort/mostRecent}"></span> Most Recent </a>
+                                <a th:href="@{/page/sort/}+${'mostRecent'}"></span> Most Recent </a>
                             </li>
                             <li class="divider"></li>
 
                             <li class="">
-                                <a th:href="@{/sort/mostEdited}"></span> Most Edited </a>
+                                <a th:href="@{/page/sort/}+${'mostEdited'}"></span> Most Edited </a>
                             </li>
                             <li class="divider"></li>
                         </ul>
@@ -69,7 +69,7 @@
             </div>
         </div>
 
-        <ul class="list-group" th:each="p : ${pageService.getAllPages()}" >
+        <ul class="list-group" th:each="p : ${pages}" >
             <li>
                 <div class="list-group-item justify-content-between">
                     <div class="media">
@@ -150,6 +150,11 @@
                                     </form>
                                     <form method="get" th:action="@{/page/deletePage/}+${p.getId()}" style="display: inline">
                                         <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</button>
+                                    </form>
+
+
+                                    <form th:if="!${accountService.getCurrentUser().getMyLikes().contains(p)}" method="get" th:action="@{/page/like/}+${p.getId()}" style="display: inline">
+                                        <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Like</button>
                                     </form>
                                 </span>
                             </ul>
