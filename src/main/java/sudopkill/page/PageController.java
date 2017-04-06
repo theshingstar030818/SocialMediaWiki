@@ -46,14 +46,20 @@ public class PageController {
 
     @RequestMapping(value = "/createPage", method = RequestMethod.POST)
     public String createPage(@ModelAttribute Page page){
-
         page.setAuthor(accountService.getCurrentUser());
         page = pageRepository.save(page);
         return "redirect:/page";
     }
 
-    @RequestMapping(value = "/page/{pageId+1}/editPage", method = RequestMethod.POST)
-    public String editPage(){return null;}
+    @RequestMapping(value = "/createChildPage", method = RequestMethod.POST)
+    public String createChildPage(@ModelAttribute Page page){
+        page.setAuthor(accountService.getCurrentUser());
+        page = pageRepository.save(page);
+        return "redirect:/page";
+    }
+
+//    @RequestMapping(value = "/page/{pageId+1}/editPage", method = RequestMethod.POST)
+//    public String editPage(){return null;}
 
     @RequestMapping(value = "/page")
     public String page(Model model){
@@ -107,12 +113,25 @@ public class PageController {
 
 
     @RequestMapping(value ="/page/deletePage/{pageId}", method = RequestMethod.GET)
-    String deletePage(@PathVariable Long pageId){
+    public String deletePage(@PathVariable Long pageId){
         pageRepository.delete(pageId);
         return "redirect:/page";
     }
 
 
+    @RequestMapping(value ="/page/editPage/{pageId}", method = RequestMethod.GET)
+    public String editPage(Model model, @PathVariable Long pageId){
+        Page page = pageRepository.findOneById(pageId);
+        model.addAttribute("page", page);
+        return "page/editPage";
+    }
+
+    @RequestMapping(value ="/page/viewPage/{pageId}", method = RequestMethod.GET)
+    public String viewPage(Model model, @PathVariable Long pageId){
+        Page page = pageRepository.findOneById(pageId);
+        model.addAttribute("page", page);
+        return "page/viewPage";
+    }
 
 
 }

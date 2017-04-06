@@ -17,6 +17,8 @@ import java.util.List;
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class PageService {
 
+    private Page currentPage;
+
     @PostConstruct
     protected void initialize() {
 //        save(new Page("BlankTest", "Test", null, null));
@@ -45,5 +47,11 @@ public class PageService {
         List<Page> pages = pageRepository.findAll();
         return pages;
     }
+
+    public Page getCurrentPage(){
+        return this.currentPage;
+    }
+
+
 
 }
