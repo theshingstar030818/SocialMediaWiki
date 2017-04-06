@@ -93,10 +93,10 @@
 
 
                                 <span class="pull-right buttons" >
-                                <form method="get" th:action="@{/page/editPage/}+${page.getId()}" style="display: inline">
+                                <form method="get" th:action="@{/page/like/}+${page.getId()}" style="display: inline">
                                     <button class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-ok"></i> Like</button>
                                 </form>
-                                <form method="get" th:action="@{/page/deletePage/}+${page.getId()}" style="display: inline">
+                                <form method="get" th:action="@{/page/dislike/}+${page.getId()}" style="display: inline">
                                     <button class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i> Dislike</button>
                                 </form>
                             </span>

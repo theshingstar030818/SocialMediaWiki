@@ -152,13 +152,12 @@
                                         <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</button>
                                     </form>
 
-
                                     <form th:if="!${currentUser.getMyLikes().contains(p)  }" method="get" th:action="@{/page/like/}+${p.getId()}" style="display: inline">
-                                        <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Like</button>
+                                        <button class="btn btn-sm primary"><i class="glyphicon glyphicon-ok"></i> Like</button>
                                     </form>
 
                                     <form th:if="${currentUser.getMyLikes().contains(p)}" method="get" th:action="@{/page/unlike/}+${p.getId()}" style="display: inline">
-                                        <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> UnLike</button>
+                                        <button class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i> UnLike</button>
                                     </form>
                                 </span>
                             </ul>

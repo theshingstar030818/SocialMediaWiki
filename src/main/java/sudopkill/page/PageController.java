@@ -99,13 +99,17 @@ public class PageController {
 
     @RequestMapping(value ="/page/like/{pageId}", method = RequestMethod.GET)
     String likePage(@PathVariable Long pageId){
-        accountService.addlike(pageService.getPage(pageId));
+        Page page = pageRepository.findOneById(pageId);
+        accountService.addlike(page);
+        page.getLikes().add(accountService.getCurrentUser());
         return "redirect:/page";
     }
 
     @RequestMapping(value ="/page/unlike/{pageId}", method = RequestMethod.GET)
     String unlikePage(@PathVariable Long pageId){
         accountService.removelike(pageService.getPage(pageId));
+        Page page = pageRepository.findOneById(pageId);
+        page.getLikes().remove(accountService.getCurrentUser());
         return "redirect:/page";
     }
 
