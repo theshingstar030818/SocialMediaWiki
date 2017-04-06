@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
                 <div class="col-sm-12">
-                    <div class="col-xs-12 col-sm-4 text-center">
+                    <div class="col-xs-6 col-sm-4 text-center">
                         <button type="button" class="btn btn-block btn-default dropdown-toggle" data-toggle="dropdown">
                             <span>Menu</span>
                             <span class="caret"></span>
@@ -36,7 +36,34 @@
                             <li class="divider"></li>
                         </ul>
                     </div>
+
+                    <div class="col-xs-6 col-sm-4 text-center">
+                        <button type="button" class="btn btn-block btn-default dropdown-toggle" data-toggle="dropdown">
+                            <span>Sort By</span>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+
+                            <li class="">
+                                <a th:href="@{/sort/mostLiked}"></span> Most Liked </a>
+                            </li>
+                            <li class="divider"></li>
+
+                            <li class="">
+                                <a th:href="@{/sort/mostRecent}"></span> Most Recent </a>
+                            </li>
+                            <li class="divider"></li>
+
+                            <li class="">
+                                <a th:href="@{/sort/mostEdited}"></span> Most Edited </a>
+                            </li>
+                            <li class="divider"></li>
+                        </ul>
+                    </div>
                 </div>
+
+
+
             </div>
         </div>
 

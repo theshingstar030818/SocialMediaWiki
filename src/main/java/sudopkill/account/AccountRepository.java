@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -27,5 +28,24 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     Account findOneByUsername(String username);
     @Query("select count(a) > 0 from Account a where a.username = :username")
     boolean existsUsername(@Param("username") String username);
+
+    /*
+    public List<Account> findAllByMyFollowers(){
+        return Account.findAll(new Sort(Sort.Direction.ASC,"myFollowers"));
+    }*/
+
+    public List<Account> findAllByOrderByIdAsc();
+
+
+    public List<Account> findAllByOrderByIdDesc();
+
+//    @Query("select a from Account a ORDER BY COUNT(myfollowers) DESC")
+//    List<Account> findAllByMyFollowers();
+
+    @Query("select a from Account a order by a.myFollowers.size desc")
+    List<Account> findAllByMyFollowers();
+
+
+
 
 }
