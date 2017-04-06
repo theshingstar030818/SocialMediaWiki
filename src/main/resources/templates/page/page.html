@@ -112,11 +112,17 @@
                                 </li>
 
 
-                                <span class="pull-right buttons">
+                                <span class="pull-right buttons" >
+                                    <form method="get" th:action="@{/page/deletePage/}+${p.getId()}" style="display: inline">
                                         <button class="btn btn-sm btn-default"><i class="fa fa-eye"></i> View</button>
+                                    </form>
+                                    <form method="get" th:action="@{/page/deletePage/}+${p.getId()}" style="display: inline">
                                         <button class="btn btn-sm btn-primary"><i class="fa fa-pencil-square-o"></i> Edit</button>
+                                    </form>
+                                    <form method="get" th:action="@{/page/deletePage/}+${p.getId()}" style="display: inline">
                                         <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</button>
-                                    </span>
+                                    </form>
+                                </span>
                             </ul>
                         </div>
                     </div>
