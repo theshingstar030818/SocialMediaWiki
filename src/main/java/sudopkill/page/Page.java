@@ -4,6 +4,7 @@ package sudopkill.page;
 
         import javax.persistence.*;
         import java.time.Instant;
+        import java.time.ZonedDateTime;
         import java.util.HashSet;
         import java.util.Set;
         import java.time.format.DateTimeFormatter;
@@ -70,7 +71,7 @@ public class Page {
     }
 
     public Instant getCreated() {
-        return created;
+        return this.created;
     }
 
     @OneToOne
